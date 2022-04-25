@@ -47,22 +47,22 @@ public class FPSController : MonoBehaviour
         //¶‚ÉˆÚ“®
         if(Input.GetKey(KeyCode.A))
         {
-            this.transform.Translate(-0.1f, 0.0f, 0.0f);
+            this.transform.Translate(-0.01f, 0.0f, 0.0f);
         }
         //‰E‚ÉˆÚ“®
         if(Input.GetKey(KeyCode.D))
         {
-            this.transform.Translate(0.1f, 0.0f, 0.0f);
+            this.transform.Translate(0.01f, 0.0f, 0.0f);
         }
         //ã‚ÉˆÚ“®
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.W))
         {
-            this.transform.Translate(0.0f, 0.0f, 0.1f);
+            this.transform.Translate(0.0f, 0.0f, 0.01f);
         }
         //‰º‚ÉˆÚ“®
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.S))
         {
-            this.transform.Translate(0.0f, 0.0f, 0.1f);
+            this.transform.Translate(0.0f, 0.0f, -0.01f);
         }
     }
 
