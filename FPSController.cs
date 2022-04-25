@@ -16,9 +16,12 @@ public class FPSController : MonoBehaviour
     //•Ï”‚ÌéŒ¾(Šp“x‚Ì§ŒÀ—p)
     float minX = -90f, maxX = 90f;
 
+    Rigidbody rigidbody;
+
     // Start is called before the first frame update
     void Start()
     {
+        rigidbody = this.GetComponent<Rigidbody>();
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
     }
@@ -40,6 +43,27 @@ public class FPSController : MonoBehaviour
 
 
         UpdateCursorLock();
+
+        //¶‚ÉˆÚ“®
+        if(Input.GetKey(KeyCode.A))
+        {
+            this.transform.Translate(-0.1f, 0.0f, 0.0f);
+        }
+        //‰E‚ÉˆÚ“®
+        if(Input.GetKey(KeyCode.D))
+        {
+            this.transform.Translate(0.1f, 0.0f, 0.0f);
+        }
+        //ã‚ÉˆÚ“®
+        if (Input.GetKey(KeyCode.D))
+        {
+            this.transform.Translate(0.0f, 0.0f, 0.1f);
+        }
+        //‰º‚ÉˆÚ“®
+        if (Input.GetKey(KeyCode.D))
+        {
+            this.transform.Translate(0.0f, 0.0f, 0.1f);
+        }
     }
 
     private void FixedUpdate()
