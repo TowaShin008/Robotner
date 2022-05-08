@@ -7,8 +7,17 @@ public class FPSController : MonoBehaviour
     float x, z;
     float speed = 0.1f;
 
+    Vector3 characterPos;
+    float playerBasePosY;
+
     public GameObject cam;
     Quaternion cameraRot, characterRot;
+
+    public GameObject tabletPivot;
+    Quaternion tabletPivotRot;
+
+    bool tabletPowerFlag;
+
     float Xsensityvity = 3f, Ysensityvity = 3f;
 
     bool cursorLock = true;
@@ -16,14 +25,19 @@ public class FPSController : MonoBehaviour
     //変数の宣言(角度の制限用)
     float minX = -90f, maxX = 90f;
 
-    Rigidbody rigidbody;
+    private Rigidbody rigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
         rigidbody = this.GetComponent<Rigidbody>();
         cameraRot = cam.transform.localRotation;
+        characterPos = transform.position;
+        playerBasePosY = characterPos.y;
         characterRot = transform.localRotation;
+        tabletPivotRot = tabletPivot.transform.localRotation;
+        tabletPowerFlag = false;
     }
 
     // Update is called once per frame
@@ -41,8 +55,11 @@ public class FPSController : MonoBehaviour
         cam.transform.localRotation = cameraRot;
         transform.localRotation = characterRot;
 
-
+        //カーソルの固定処理
         UpdateCursorLock();
+
+        //タブレットの操作処理
+        TabletProcessing();
 
         //左に移動
         if(Input.GetKey(KeyCode.A))
@@ -64,6 +81,68 @@ public class FPSController : MonoBehaviour
         {
             this.transform.Translate(0.0f, 0.0f, -0.01f);
         }
+        characterPos = this.transform.position;
+        characterPos.y = playerBasePosY;
+        this.transform.position = characterPos;
+    }
+
+    //タブレットの操作処理
+    private void TabletProcessing()
+    {
+        if(tabletPowerFlag)
+        {
+            if(TabletBootProcessing())
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    tabletPowerFlag = false;
+                }
+            }
+        }
+        else
+        {
+            if (TabletShutDownProcessing())
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    tabletPowerFlag = true;
+                }
+            }
+        }
+    }
+
+    private bool TabletBootProcessing()
+    {
+        tabletPivot.transform.localRotation.ToAngleAxis(out float angle, out Vector3 axis);
+        if (angle <= 0.0f)
+        {
+            return true;
+        }
+        else
+        {
+            Quaternion rot = Quaternion.AngleAxis(-5, Vector3.right);
+            tabletPivotRot *= rot;
+            tabletPivot.transform.localRotation = tabletPivotRot;
+        }
+
+        return false;
+    }
+
+    private bool TabletShutDownProcessing()
+    {
+        tabletPivot.transform.localRotation.ToAngleAxis(out float angle, out Vector3 axis);
+        if (angle >= 180.0f)
+        {
+            return true;
+        }
+        else
+        {
+            Quaternion rot = Quaternion.AngleAxis(5, Vector3.right);
+            tabletPivotRot *= rot;
+            tabletPivot.transform.localRotation = tabletPivotRot;
+        }
+
+        return false;
     }
 
     private void FixedUpdate()
