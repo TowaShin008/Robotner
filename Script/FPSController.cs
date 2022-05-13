@@ -25,13 +25,10 @@ public class FPSController : MonoBehaviour
     //ïœêîÇÃêÈåæ(äpìxÇÃêßå¿óp)
     float minX = -90f, maxX = 90f;
 
-    private Rigidbody rigidbody;
-
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
-        rigidbody = this.GetComponent<Rigidbody>();
         cameraRot = cam.transform.localRotation;
         characterPos = transform.position;
         playerBasePosY = characterPos.y;
@@ -198,5 +195,13 @@ public class FPSController : MonoBehaviour
         q.x = Mathf.Tan(angleX * Mathf.Deg2Rad * 0.5f);
 
         return q;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name=="Enemy")
+        {
+            Debug.Log("Hit");
+        }
     }
 }
