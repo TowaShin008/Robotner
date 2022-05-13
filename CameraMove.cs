@@ -25,17 +25,17 @@ public class CameraMove : MonoBehaviour
         //現在の角度から＋ー90°を指定
         //それ以上に行かないようにする
         //→
-        if (Input.GetKey(KeyCode.RightArrow)) 
-        {
-            RotY = RotSpeed;
-        }
-        //←
-        if (Input.GetKey(KeyCode.LeftArrow)) 
+        if (Input.GetMouseButton(0)) 
         {
             RotY = -RotSpeed;
         }
-        transform.rotation = Quaternion.Euler(0.0f, transform.eulerAngles.y + RotY * Time.deltaTime,
-            0.0f);
+        //←
+        if (Input.GetMouseButton(1)) 
+        {
+            RotY = RotSpeed;
+        }
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + RotY * Time.deltaTime,
+           transform.eulerAngles.z);
 
         RotY = 0;
     }
