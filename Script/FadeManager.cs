@@ -36,7 +36,7 @@ public class FadeManager : MonoBehaviour
         fadeCanvas = FadeCanvasObject.AddComponent<Canvas>();
         FadeCanvasObject.AddComponent<GraphicRaycaster>();
         fadeCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        FadeCanvasObject.AddComponent<FadeManager2>();
+        FadeCanvasObject.AddComponent<FadeManager>();
 
         //最前面になるよう適当なソートオーダー設定
         fadeCanvas.sortingOrder = 100;
