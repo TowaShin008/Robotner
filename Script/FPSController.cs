@@ -18,7 +18,7 @@ public class FPSController : MonoBehaviour
 
     bool tabletPowerFlag;
 
-    float Xsensityvity = 3f, Ysensityvity = 3f;
+    public float Xsensityvity = 3f, Ysensityvity = 3f;
 
     bool cursorLock = true;
 
