@@ -5,10 +5,8 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     // Start is called before the first frame update
-    //カメラのトランスフォーム取得
-    private Transform cameraTransform;
     //最大振り向き角度
-    private float MaxRotate = 90;
+   // private float MaxRotate = 90;
     //振り向きスピード
     //[SerializeField]
     private float RotSpeed = 30;
@@ -16,7 +14,6 @@ public class CameraMove : MonoBehaviour
     private float RotY = 0f;
     void Start()
     {
-        cameraTransform = this.transform;
     }
 
     // Update is called once per frame

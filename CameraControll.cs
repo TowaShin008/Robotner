@@ -51,13 +51,14 @@ public class CameraControll : MonoBehaviour
             //今見ているカメラが最大数になったら最初のカメラに戻す
             if (nowWatchCamera == cameraNum)
             {
-                nowWatchCamera = 0;
+                nowWatchCamera -= nowWatchCamera;
             }
             //今見ているカメラだけをアクティブ状態に
             cameraList[nowWatchCamera].SetActive(active);
-            //カメラの最大数分アクティブ状態をfalseにする
+            //全カメラのアクティブ変更
             for (int i = 0; i < cameraNum; i++)
             {
+                //今見ているカメラ以外を非アクティブに
                 if (nowWatchCamera != i)
                 {
                     cameraList[i].SetActive(!active);
