@@ -58,29 +58,8 @@ public class FPSController : MonoBehaviour
         //タブレットの操作処理
         TabletProcessing();
 
-        //左に移動
-        if(Input.GetKey(KeyCode.A))
-        {
-            this.transform.Translate(-0.01f, 0.0f, 0.0f);
-        }
-        //右に移動
-        if(Input.GetKey(KeyCode.D))
-        {
-            this.transform.Translate(0.01f, 0.0f, 0.0f);
-        }
-        //上に移動
-        if (Input.GetKey(KeyCode.W))
-        {
-            this.transform.Translate(0.0f, 0.0f, 0.01f);
-        }
-        //下に移動
-        if (Input.GetKey(KeyCode.S))
-        {
-            this.transform.Translate(0.0f, 0.0f, -0.01f);
-        }
-        characterPos = this.transform.position;
-        characterPos.y = playerBasePosY;
-        this.transform.position = characterPos;
+        //移動処理
+        MoveProcessing();
     }
 
     //タブレットの操作処理
@@ -89,7 +68,7 @@ public class FPSController : MonoBehaviour
         if(tabletPowerFlag)
         {
             if(TabletBootProcessing())
-            {
+            {//完全に起動している場合のみシャットダウンを受け付ける
                 if (Input.GetKey(KeyCode.E))
                 {
                     tabletPowerFlag = false;
@@ -101,7 +80,7 @@ public class FPSController : MonoBehaviour
             if (TabletShutDownProcessing())
             {
                 if (Input.GetKey(KeyCode.E))
-                {
+                {//完全にシャットダウンしている場合のみ起動を受け付ける
                     tabletPowerFlag = true;
                 }
             }
@@ -140,6 +119,35 @@ public class FPSController : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void MoveProcessing()
+    {
+        //左に移動
+        if (Input.GetKey(KeyCode.A))
+        {
+            this.transform.Translate(-0.01f, 0.0f, 0.0f);
+        }
+        //右に移動
+        if (Input.GetKey(KeyCode.D))
+        {
+            this.transform.Translate(0.01f, 0.0f, 0.0f);
+        }
+        //上に移動
+        if (Input.GetKey(KeyCode.W))
+        {
+            this.transform.Translate(0.0f, 0.0f, 0.01f);
+        }
+        //下に移動
+        if (Input.GetKey(KeyCode.S))
+        {
+            this.transform.Translate(0.0f, 0.0f, -0.01f);
+        }
+        characterPos = this.transform.position;
+
+        //プレイヤーが浮かないように一定の高さで固定
+        characterPos.y = playerBasePosY;
+        this.transform.position = characterPos;
     }
 
     private void FixedUpdate()
