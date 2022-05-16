@@ -5,72 +5,29 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    //それぞれのアプリ用のオブジェクトを用意する。
-    [SerializeField] GameObject menuPanel;
-    [SerializeField] GameObject cameraPanel;
-    [SerializeField] GameObject switchPanel;
-    [SerializeField] GameObject mapPanel;
-    [SerializeField] GameObject AccessCodePanel;
 
-    
+    public List<GameObject> gameObjects;
 
     // Start is called before the first frame update
     void Start()
     {
         //メニューに戻る
-        BackToMenu();
+        ChangeScreen(gameObjects[0].name);
     }
-
 
     //カメラのアプリのみアクティブにする。
-    public void SelectCameraDescription()
+    public void ChangeScreen(string screenName)
     {
-        menuPanel.SetActive(false);
-        switchPanel.SetActive(false);
-        cameraPanel.SetActive(true);
-        mapPanel.SetActive(false);
-        AccessCodePanel.SetActive(false);
-    }
-
-
-    //スイッチのアプリのアクティブにする
-    public void SelectSwitchDescription()
-    {
-        menuPanel.SetActive(false);
-        cameraPanel.SetActive(false);
-        switchPanel.SetActive(true);
-        mapPanel.SetActive(false);
-        AccessCodePanel.SetActive(false);
-    }
-
-    //マップのアプリのみアクティブにする
-    public void SelectMapDescription()
-    {
-        menuPanel.SetActive(false);
-        cameraPanel.SetActive(false);
-        switchPanel.SetActive(false);
-        mapPanel.SetActive(true);
-        AccessCodePanel.SetActive(false);
-    }
-
-    //Aアクセスコードのみアクティブにする
-    public void SelectAccessCodeDescription()
-    {
-        menuPanel.SetActive(false);
-        cameraPanel.SetActive(false);
-        switchPanel.SetActive(false);
-        mapPanel.SetActive(false);
-        AccessCodePanel.SetActive(true);
-    }
-
-
-    //メニューのみアクティブにする
-    public void BackToMenu()
-    {
-        menuPanel.SetActive(true);
-        cameraPanel.SetActive(false);
-        switchPanel.SetActive(false);
-        mapPanel.SetActive(false);
-        AccessCodePanel.SetActive(false);
+        for (int i = 0; i < gameObjects.Count; i++)
+        {
+            if (gameObjects[i].name == screenName)
+            {
+                gameObjects[i].SetActive(true);
+            }
+            else
+            {
+                gameObjects[i].SetActive(false);
+            }
+        }
     }
 }

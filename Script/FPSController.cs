@@ -25,6 +25,8 @@ public class FPSController : MonoBehaviour
     //変数の宣言(角度の制限用)
     float minX = -90f, maxX = 90f;
 
+    bool cameraMoveFlag = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,17 +42,34 @@ public class FPSController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
-        float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
+        if (cameraMoveFlag)
+        {
+            float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
+            float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
 
-        cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-        characterRot *= Quaternion.Euler(0, xRot, 0);
+            cameraRot *= Quaternion.Euler(-yRot, 0, 0);
+            characterRot *= Quaternion.Euler(0, xRot, 0);
 
-        //Updateの中で作成した関数を呼ぶ
-        cameraRot = ClampRotation(cameraRot);
+            //Updateの中で作成した関数を呼ぶ
+            cameraRot = ClampRotation(cameraRot);
 
-        cam.transform.localRotation = cameraRot;
-        transform.localRotation = characterRot;
+            cam.transform.localRotation = cameraRot;
+            transform.localRotation = characterRot;
+        }
+        else
+        {
+            float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
+            float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
+
+            cameraRot *= Quaternion.Euler(-yRot, 0, 0);
+            characterRot *= Quaternion.Euler(0, xRot, 0);
+
+            //Updateの中で作成した関数を呼ぶ
+            cameraRot = ClampRotation(cameraRot);
+
+            cam.transform.localRotation = cameraRot;
+            transform.localRotation = characterRot;
+        }
 
         //カーソルの固定処理
         UpdateCursorLock();
@@ -59,12 +78,12 @@ public class FPSController : MonoBehaviour
         TabletProcessing();
 
         //左に移動
-        if(Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             this.transform.Translate(-0.01f, 0.0f, 0.0f);
         }
         //右に移動
-        if(Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             this.transform.Translate(0.01f, 0.0f, 0.0f);
         }
@@ -86,11 +105,11 @@ public class FPSController : MonoBehaviour
     //タブレットの操作処理
     private void TabletProcessing()
     {
-        if(tabletPowerFlag)
+        if (tabletPowerFlag)
         {
-            if(TabletBootProcessing())
+            if (TabletBootProcessing())
             {
-                if (Input.GetKey(KeyCode.E))
+                if (Input.GetKey(KeyCode.Tab))
                 {
                     tabletPowerFlag = false;
                 }
@@ -100,7 +119,7 @@ public class FPSController : MonoBehaviour
         {
             if (TabletShutDownProcessing())
             {
-                if (Input.GetKey(KeyCode.E))
+                if (Input.GetKey(KeyCode.Tab))
                 {
                     tabletPowerFlag = true;
                 }
@@ -158,13 +177,14 @@ public class FPSController : MonoBehaviour
 
     public void UpdateCursorLock()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            cursorLock = false;
+            cursorLock = !cursorLock;
+            Test();
         }
         else if (Input.GetMouseButton(0))
         {
-            cursorLock = true;
+            //cursorLock = true;
         }
 
 
@@ -199,9 +219,14 @@ public class FPSController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name=="Enemy")
+        if (collision.gameObject.name == "Enemy")
         {
             Debug.Log("Hit");
         }
+    }
+
+    public void Test()
+    {
+        cameraMoveFlag = !cameraMoveFlag;
     }
 }
