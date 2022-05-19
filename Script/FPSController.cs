@@ -40,17 +40,25 @@ public class FPSController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
-        float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
+        //if (tabletPowerFlag == false)
+        {
+            
+            float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
 
-        cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-        characterRot *= Quaternion.Euler(0, xRot, 0);
+            cameraRot *= Quaternion.Euler(-yRot, 0, 0);
 
-        //Updateの中で作成した関数を呼ぶ
-        cameraRot = ClampRotation(cameraRot);
+            //Updateの中で作成した関数を呼ぶ
+            cameraRot = ClampRotation(cameraRot);
 
-        cam.transform.localRotation = cameraRot;
-        transform.localRotation = characterRot;
+            cam.transform.localRotation = cameraRot;
+
+            if (tabletPowerFlag == false)
+            {
+                float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
+                characterRot *= Quaternion.Euler(0, xRot, 0);
+                transform.localRotation = characterRot;
+            }
+        }
 
         //カーソルの固定処理
         UpdateCursorLock();
@@ -58,8 +66,11 @@ public class FPSController : MonoBehaviour
         //タブレットの操作処理
         TabletProcessing();
 
-        //移動処理
-        MoveProcessing();
+        if(tabletPowerFlag == false)
+        {
+            //移動処理
+            MoveProcessing();
+        }
     }
 
     //タブレットの操作処理
@@ -152,6 +163,8 @@ public class FPSController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (tabletPowerFlag) { return; }
+        
         x = 0;
         z = 0;
 
