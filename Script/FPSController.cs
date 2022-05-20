@@ -23,7 +23,7 @@ public class FPSController : MonoBehaviour
     bool deadFlag;
 
     //変数の宣言(角度の制限用)
-    float minX = -90f, maxX = 90f;
+    float minX = -20f, maxX = 20f;
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +78,8 @@ public class FPSController : MonoBehaviour
             {//完全に起動している場合のみシャットダウンを受け付ける
                 if (Input.GetKey(KeyCode.E))
                 {
+                    minX = -90f;
+                    maxX = 90f;
                     tabletPowerFlag = false;
                 }
             }
@@ -85,15 +87,17 @@ public class FPSController : MonoBehaviour
         else
         {
             if (TabletShutDownProcessing())
-            {
+            {//完全にシャットダウンしている場合のみ起動を受け付ける
                 if (Input.GetKey(KeyCode.E))
-                {//完全にシャットダウンしている場合のみ起動を受け付ける
+                {
+                    minX = -20f;
+                    maxX = 20f;
                     tabletPowerFlag = true;
                 }
             }
         }
     }
-
+    //タブレットの起動処理
     private bool TabletBootProcessing()
     {
         tabletPivot.transform.localRotation.ToAngleAxis(out float angle, out Vector3 axis);
@@ -110,7 +114,7 @@ public class FPSController : MonoBehaviour
 
         return false;
     }
-
+    //タブレットのシャットダウン処理
     private bool TabletShutDownProcessing()
     {
         tabletPivot.transform.localRotation.ToAngleAxis(out float angle, out Vector3 axis);
@@ -126,7 +130,7 @@ public class FPSController : MonoBehaviour
         }
         return false;
     }
-
+    //プレイヤーの移動処理
     private void MoveProcessing()
     {
         //左に移動
