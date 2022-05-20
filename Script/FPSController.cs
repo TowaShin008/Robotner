@@ -20,7 +20,7 @@ public class FPSController : MonoBehaviour
 
     float Xsensityvity = 3f, Ysensityvity = 3f;
 
-    bool cursorLock = true;
+    bool deadFlag;
 
     //変数の宣言(角度の制限用)
     float minX = -90f, maxX = 90f;
@@ -35,33 +35,29 @@ public class FPSController : MonoBehaviour
         characterRot = transform.localRotation;
         tabletPivotRot = tabletPivot.transform.localRotation;
         tabletPowerFlag = false;
+        deadFlag = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (tabletPowerFlag == false)
+        float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
+
+        cameraRot *= Quaternion.Euler(-yRot, 0, 0);
+
+        //Updateの中で作成した関数を呼ぶ
+        cameraRot = ClampRotation(cameraRot);
+
+        cam.transform.localRotation = cameraRot;
+
+        //タブレット起動時のみ視点の横移動を制限
+        if (tabletPowerFlag == false)
         {
-            
-            float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
-
-            cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-
-            //Updateの中で作成した関数を呼ぶ
-            cameraRot = ClampRotation(cameraRot);
-
-            cam.transform.localRotation = cameraRot;
-
-            if (tabletPowerFlag == false)
-            {
-                float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
-                characterRot *= Quaternion.Euler(0, xRot, 0);
-                transform.localRotation = characterRot;
-            }
+            float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
+            characterRot *= Quaternion.Euler(0, xRot, 0);
+            transform.localRotation = characterRot;
         }
 
-        //カーソルの固定処理
-        UpdateCursorLock();
 
         //タブレットの操作処理
         TabletProcessing();
@@ -128,7 +124,6 @@ public class FPSController : MonoBehaviour
             tabletPivotRot *= rot;
             tabletPivot.transform.localRotation = tabletPivotRot;
         }
-
         return false;
     }
 
@@ -176,29 +171,6 @@ public class FPSController : MonoBehaviour
         transform.position += cam.transform.forward * z + cam.transform.right * x;
     }
 
-
-    public void UpdateCursorLock()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            cursorLock = false;
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            cursorLock = true;
-        }
-
-
-        if (cursorLock)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else if (!cursorLock)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-    }
-
     //角度制限関数の作成
     public Quaternion ClampRotation(Quaternion q)
     {
@@ -223,6 +195,7 @@ public class FPSController : MonoBehaviour
         if(collision.gameObject.name=="Enemy")
         {
             Debug.Log("Hit");
+            deadFlag = true;
         }
     }
 }
