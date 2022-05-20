@@ -152,7 +152,6 @@ public class FPSController : MonoBehaviour
         //プレイヤーが浮かないように一定の高さで固定(Y軸のポジションを固定)
         characterPos.y = playerBasePosY;
         this.transform.position = characterPos;
-        //transform.position += new Vector3(x,0,z);
 
         transform.position += cam.transform.forward * z + cam.transform.right * x;
     }
