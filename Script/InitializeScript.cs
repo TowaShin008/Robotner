@@ -10,6 +10,7 @@ public class InitializeScript : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+        FadeManager.FadeIn();
     }
 
     // Update is called once per frame

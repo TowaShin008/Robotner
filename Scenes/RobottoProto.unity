@@ -4357,7 +4357,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 745072582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b43e0c9f9fd5964989fbf7f0a5e823a, type: 3}
+  m_Script: {fileID: 11500000, guid: 248c439932ca4e94e9127069dc0ba676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   transmitterPrefab: {fileID: 1405645258}
@@ -5448,6 +5448,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1128203882}
   - component: {fileID: 1128203883}
+  - component: {fileID: 1128203884}
   m_Layer: 0
   m_Name: InitializeScript
   m_TagString: Untagged
@@ -5480,6 +5481,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2388174f702102d4b9817f7c59efdb06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1128203884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128203881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbfe78c9c1039cd439f3dd9888dd9d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1131092472
@@ -7653,7 +7666,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1474323891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e9330e5d9cbb934a8cda44864df9727, type: 3}
+  m_Script: {fileID: 11500000, guid: 997b7c108b3962a48965b8c8532154cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textObject: {fileID: 458485286}
@@ -9291,7 +9304,7 @@ GameObject:
   - component: {fileID: 1723781379}
   - component: {fileID: 1723781378}
   - component: {fileID: 1723781377}
-  - component: {fileID: 1723781376}
+  - component: {fileID: 1723781382}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -9299,18 +9312,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1723781376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723781375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3795d90c97c28a240a5466ef2a208622, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &1723781377
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9407,6 +9408,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1723781382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723781375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1e34642845d3443945b0149d0f7401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1726562705
 GameObject:
   m_ObjectHideFlags: 0
@@ -9613,6 +9626,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 2138907982}
   tabletPivot: {fileID: 1597065816}
+  Xsensityvity: 1
+  Ysensityvity: 1
 --- !u!136 &1737415531
 CapsuleCollider:
   m_ObjectHideFlags: 0

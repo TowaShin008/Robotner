@@ -20,7 +20,7 @@ public class FPSController : MonoBehaviour
     bool tabletPowerFlag;
 
     //XY•ûŒü‚ÌŽ‹“_Š´“x
-    float Xsensityvity = 3f, Ysensityvity = 3f;
+     public float Xsensityvity, Ysensityvity;
 
     bool deadFlag;
 
