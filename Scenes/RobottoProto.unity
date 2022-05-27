@@ -1808,10 +1808,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {x: 0, y: 0, z: 15}
-  - {x: -10, y: 0, z: 15}
-  - {x: -10, y: 0, z: 6}
-  - {x: 0, y: 0, z: 6}
+  - {x: 0, y: 0, z: 18}
+  - {x: -12, y: 0, z: 18}
+  - {x: -12, y: 0, z: 7}
+  - {x: 0, y: 0, z: 7}
   player: {fileID: 1737415534}
   enemyPos: {fileID: 305032346}
 --- !u!195 &305032341
@@ -1825,7 +1825,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 6
-  m_Acceleration: 8
+  m_Acceleration: 24
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -6952,10 +6952,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wayPoints:
-  - {x: -20, y: 0, z: 20}
-  - {x: -20, y: 0, z: -2}
-  - {x: -40, y: 0, z: -2}
-  - {x: -40, y: 0, z: 20}
+  - {x: -22, y: 0, z: 20}
+  - {x: -22, y: 0, z: -2}
+  - {x: -42, y: 0, z: -2}
+  - {x: -42, y: 0, z: 20}
   player: {fileID: 1737415534}
   enemyPos: {fileID: 1361896439}
 --- !u!195 &1361896441
@@ -6969,7 +6969,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 6
-  m_Acceleration: 8
+  m_Acceleration: 24
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
