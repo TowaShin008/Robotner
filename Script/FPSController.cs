@@ -73,11 +73,11 @@ public class FPSController : MonoBehaviour
     //タブレットの操作処理
     private void TabletProcessing()
     {
-        if(tabletPowerFlag)
+        if (tabletPowerFlag)
         {
-            if(TabletBootProcessing())
+            if (TabletBootProcessing())
             {//完全に起動している場合のみシャットダウンを受け付ける
-                if (Input.GetKey(KeyCode.E))
+                if (Input.GetKey(KeyCode.Tab))
                 {
                     const float normalMaxX = 90f;
                     const float normalMinX = -90f;
@@ -91,7 +91,7 @@ public class FPSController : MonoBehaviour
         {
             if (TabletShutDownProcessing())
             {//完全にシャットダウンしている場合のみ起動を受け付ける
-                if (Input.GetKey(KeyCode.E))
+                if (Input.GetKey(KeyCode.Tab))
                 {
                     const float tabletMaxX = 5f;
                     const float tabletMinX = -5f;
@@ -139,7 +139,7 @@ public class FPSController : MonoBehaviour
     private void FixedUpdate()
     {
         if (tabletPowerFlag) { return; }
-        
+
         x = 0;
         z = 0;
 
@@ -177,7 +177,7 @@ public class FPSController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name=="Enemy")
+        if (collision.gameObject.name == "Enemy")
         {
             Debug.Log("Hit");
             deadFlag = true;
