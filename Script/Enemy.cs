@@ -8,10 +8,14 @@ public class Enemy : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
 
+	//巡回する4箇所のポイント
     public Vector3[] wayPoints = new Vector3[4];
+	//現在の目的の座標
     private int currentRoot;
     private int mode;
-    public Transform player;
+	//プレイヤーのポジション
+    public Transform playerPos;
+	//エネミーのポジション
     public Transform enemyPos;
 
     private void Start()
@@ -22,7 +26,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
 		Vector3 pos = wayPoints[currentRoot];//Vector3型のposに現在の目的地の座標を代入
-		float distance = Vector3.Distance(enemyPos.position, player.transform.position);//敵とプレイヤーの距離を求める
+		float distance = Vector3.Distance(enemyPos.position, playerPos.transform.position);//敵とプレイヤーの距離を求める
 
 		if (distance > 5)
 		{//もしプレイヤーと敵の距離が5以上なら
@@ -51,7 +55,7 @@ public class Enemy : MonoBehaviour
 				break;//switch文の各パターンの最後につける
 
 			case 1://case1の場合
-				navMeshAgent.destination = player.transform.position;//プレイヤーに向かって進む		
+				navMeshAgent.destination = playerPos.transform.position;//プレイヤーに向かって進む		
 				break;//switch文の各パターンの最後につける
 		}
 	}
