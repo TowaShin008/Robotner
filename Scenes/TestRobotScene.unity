@@ -1637,6 +1637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2076828692}
   - component: {fileID: 2076828691}
+  - component: {fileID: 2076828693}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -1656,9 +1657,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 100
-  m_Range: 5.26
-  m_SpotAngle: 38
+  m_Intensity: 50
+  m_Range: 5.69
+  m_SpotAngle: 35
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -1713,11 +1714,25 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076828690}
-  m_LocalRotation: {x: 0.98936605, y: 0.0004465667, z: 0.00684955, w: 0.14528528}
-  m_LocalPosition: {x: 0.16999999, y: 0.76, z: -0.17}
+  m_LocalRotation: {x: -0, y: 0.17364825, z: -0.9848078, w: 0}
+  m_LocalPosition: {x: 0.16999997, y: 0.76, z: -0.17000008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 163.293, y: -0.81900024, z: -0.17199707}
+  m_LocalEulerAnglesHint: {x: 160, y: 180, z: 0}
+--- !u!114 &2076828693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076828690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc17d17979925034f998adb670c1c5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robotLight: {fileID: 2076828690}
+  robot: {fileID: 391610809}
