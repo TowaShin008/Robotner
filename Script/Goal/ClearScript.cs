@@ -23,7 +23,10 @@ public class ClearScript : MonoBehaviour
             accessCodeText.text = string.Format("CLEAR!!!");
             timeText.text = string.Format("time : " + processTimeINT);
 
-            FadeManager.FadeOut(1);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                FadeManager.FadeOut("Scene_Title");
+            }
 
             return;
         }

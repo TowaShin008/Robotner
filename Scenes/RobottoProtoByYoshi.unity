@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 18265936}
   - component: {fileID: 18265938}
   - component: {fileID: 18265937}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 95379355}
   - component: {fileID: 95379354}
   - component: {fileID: 95379357}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,104 +1154,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 182967965}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &189339096
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 189339097}
-  - component: {fileID: 189339100}
-  - component: {fileID: 189339099}
-  - component: {fileID: 189339098}
-  m_Layer: 0
-  m_Name: Celing (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &189339097
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189339096}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.99, y: 0.64, z: 5.64}
-  m_LocalScale: {x: 0.22742626, y: 0.22742629, z: 0.22742626}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1408503948}
-  m_RootOrder: 29
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &189339098
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189339096}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &189339099
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189339096}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &189339100
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189339096}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &194781846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,7 +1263,7 @@ GameObject:
   - component: {fileID: 211722217}
   - component: {fileID: 211722219}
   - component: {fileID: 211722218}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CollisionDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1435,7 +1337,7 @@ GameObject:
   - component: {fileID: 252424128}
   - component: {fileID: 252424130}
   - component: {fileID: 252424129}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1604,7 +1506,7 @@ GameObject:
   - component: {fileID: 273377262}
   - component: {fileID: 273377264}
   - component: {fileID: 273377263}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1835,7 +1737,7 @@ GameObject:
   m_Component:
   - component: {fileID: 296865308}
   - component: {fileID: 296865309}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: RobotCameraScript
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1886,7 +1788,7 @@ GameObject:
   - component: {fileID: 305032342}
   - component: {fileID: 305032341}
   - component: {fileID: 305032340}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1905,6 +1807,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb7a6e80c324ce44827511cb763bd87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wayPoints:
+  - {x: 0, y: 0, z: 18}
+  - {x: -12, y: 0, z: 18}
+  - {x: -12, y: 0, z: 7}
+  - {x: 0, y: 0, z: 7}
+  player: {fileID: 1737415534}
+  enemyPos: {fileID: 305032346}
 --- !u!195 &305032341
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1916,7 +1825,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 6
-  m_Acceleration: 8
+  m_Acceleration: 24
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -2014,7 +1923,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305032339}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.31, y: 2.997023, z: 15.26}
+  m_LocalPosition: {x: 10, y: 3, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2176,7 +2085,7 @@ GameObject:
   - component: {fileID: 375266924}
   - component: {fileID: 375266926}
   - component: {fileID: 375266925}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2716,7 +2625,7 @@ GameObject:
   - component: {fileID: 458485289}
   - component: {fileID: 458485288}
   - component: {fileID: 458485287}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2894,7 +2803,7 @@ GameObject:
   - component: {fileID: 485145698}
   - component: {fileID: 485145697}
   - component: {fileID: 485145696}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Button_Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3518,9 +3427,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 559635654}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3650,7 +3559,7 @@ GameObject:
   - component: {fileID: 572693867}
   - component: {fileID: 572693869}
   - component: {fileID: 572693868}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3966,7 +3875,7 @@ GameObject:
   - component: {fileID: 618830330}
   - component: {fileID: 618830332}
   - component: {fileID: 618830331}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4196,7 +4105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 650078752}
   - component: {fileID: 650078753}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4292,7 +4201,7 @@ GameObject:
   - component: {fileID: 683043231}
   - component: {fileID: 683043230}
   - component: {fileID: 683043229}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Button_Home
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4424,7 +4333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 745072583}
   - component: {fileID: 745072584}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TransmitterSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4470,7 +4379,7 @@ GameObject:
   - component: {fileID: 769661318}
   - component: {fileID: 769661320}
   - component: {fileID: 769661319}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4722,7 +4631,7 @@ GameObject:
   - component: {fileID: 850680620}
   - component: {fileID: 850680622}
   - component: {fileID: 850680621}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5317,7 +5226,7 @@ GameObject:
   - component: {fileID: 1028410671}
   - component: {fileID: 1028410670}
   - component: {fileID: 1028410669}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Tablet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5414,7 +5323,7 @@ GameObject:
   - component: {fileID: 1036680676}
   - component: {fileID: 1036680675}
   - component: {fileID: 1036680674}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Button_AccessCode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5757,7 +5666,7 @@ GameObject:
   - component: {fileID: 1157416632}
   - component: {fileID: 1157416631}
   - component: {fileID: 1157416630}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Screen_AccessCode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6169,7 +6078,7 @@ GameObject:
   - component: {fileID: 1214228196}
   - component: {fileID: 1214228198}
   - component: {fileID: 1214228197}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: RawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6241,7 +6150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1218933917}
   - component: {fileID: 1218933918}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: AccessCode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6288,7 +6197,7 @@ GameObject:
   - component: {fileID: 1264436011}
   - component: {fileID: 1264436010}
   - component: {fileID: 1264436009}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Button_Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6519,7 +6428,7 @@ GameObject:
   - component: {fileID: 1269114713}
   - component: {fileID: 1269114712}
   - component: {fileID: 1269114711}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6628,7 +6537,7 @@ GameObject:
   - component: {fileID: 1277724881}
   - component: {fileID: 1277724880}
   - component: {fileID: 1277724879}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Button_Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7007,7 +6916,7 @@ GameObject:
   - component: {fileID: 1361896442}
   - component: {fileID: 1361896441}
   - component: {fileID: 1361896440}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -7022,7 +6931,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361896438}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9699986, y: 2.997023, z: 15.26}
+  m_LocalPosition: {x: 0, y: 2.997023, z: 15.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7042,6 +6951,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb7a6e80c324ce44827511cb763bd87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wayPoints:
+  - {x: -22, y: 0, z: 20}
+  - {x: -22, y: 0, z: -2}
+  - {x: -42, y: 0, z: -2}
+  - {x: -42, y: 0, z: 20}
+  player: {fileID: 1737415534}
+  enemyPos: {fileID: 1361896439}
 --- !u!195 &1361896441
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7053,7 +6969,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 6
-  m_Acceleration: 8
+  m_Acceleration: 24
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -7384,7 +7300,7 @@ GameObject:
   - component: {fileID: 1405645262}
   - component: {fileID: 1405645261}
   - component: {fileID: 1405645260}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Transmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7537,8 +7453,6 @@ Transform:
   - {fileID: 1187202063}
   - {fileID: 95379353}
   - {fileID: 1577499063}
-  - {fileID: 1895381224}
-  - {fileID: 189339097}
   m_Father: {fileID: 261025073}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7650,7 +7564,7 @@ GameObject:
   - component: {fileID: 1457545909}
   - component: {fileID: 1457545911}
   - component: {fileID: 1457545910}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7722,7 +7636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1474323892}
   - component: {fileID: 1474323893}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TransmitterCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7866,7 +7780,7 @@ GameObject:
   - component: {fileID: 1497085764}
   - component: {fileID: 1497085766}
   - component: {fileID: 1497085765}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Screen_Switch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7943,7 +7857,7 @@ GameObject:
   - component: {fileID: 1503224300}
   - component: {fileID: 1503224302}
   - component: {fileID: 1503224301}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Screen_Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8117,7 +8031,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1564524143}
   - component: {fileID: 1564524144}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: ShowPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8263,7 +8177,7 @@ GameObject:
   - component: {fileID: 1577499065}
   - component: {fileID: 1577499064}
   - component: {fileID: 1577499066}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: ClearObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8340,7 +8254,7 @@ GameObject:
   - component: {fileID: 1578381881}
   - component: {fileID: 1578381880}
   - component: {fileID: 1578381882}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: MapCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8443,7 +8357,7 @@ GameObject:
   - component: {fileID: 1581574785}
   - component: {fileID: 1581574784}
   - component: {fileID: 1581574783}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8510,7 +8424,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &1581574785
 Canvas:
   m_ObjectHideFlags: 0
@@ -8542,7 +8456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1597065817}
   - component: {fileID: 1597065818}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: TabletPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8592,7 +8506,7 @@ GameObject:
   - component: {fileID: 1605947128}
   - component: {fileID: 1605947127}
   - component: {fileID: 1605947126}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: RobotCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8816,7 +8730,7 @@ GameObject:
   - component: {fileID: 1657060909}
   - component: {fileID: 1657060908}
   - component: {fileID: 1657060907}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Screen_Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9023,7 +8937,7 @@ GameObject:
   - component: {fileID: 1683817539}
   - component: {fileID: 1683817541}
   - component: {fileID: 1683817540}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9392,7 +9306,7 @@ GameObject:
   - component: {fileID: 1723781378}
   - component: {fileID: 1723781377}
   - component: {fileID: 1723781376}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9615,7 +9529,7 @@ GameObject:
   - component: {fileID: 1733283778}
   - component: {fileID: 1733283780}
   - component: {fileID: 1733283779}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CollisionDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9692,7 +9606,7 @@ GameObject:
   - component: {fileID: 1737415531}
   - component: {fileID: 1737415530}
   - component: {fileID: 1737415535}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -10016,7 +9930,7 @@ GameObject:
   - component: {fileID: 1814251674}
   - component: {fileID: 1814251673}
   - component: {fileID: 1814251672}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Screen_Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10194,7 +10108,7 @@ GameObject:
   - component: {fileID: 1839454584}
   - component: {fileID: 1839454586}
   - component: {fileID: 1839454585}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Screen_Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10271,7 +10185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1840589882}
   - component: {fileID: 1840589883}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10365,7 +10279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1857086662}
   - component: {fileID: 1857086663}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10418,7 +10332,7 @@ GameObject:
   - component: {fileID: 1868431348}
   - component: {fileID: 1868431347}
   - component: {fileID: 1868431346}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Button_Switch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10551,7 +10465,7 @@ GameObject:
   - component: {fileID: 1869496806}
   - component: {fileID: 1869496808}
   - component: {fileID: 1869496807}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10688,7 +10602,7 @@ GameObject:
   - component: {fileID: 1891294564}
   - component: {fileID: 1891294563}
   m_Layer: 0
-  m_Name: CameraControll
+  m_Name: Cameracontroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10722,104 +10636,6 @@ Transform:
   m_Father: {fileID: 1716050442}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1895381223
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1895381224}
-  - component: {fileID: 1895381227}
-  - component: {fileID: 1895381226}
-  - component: {fileID: 1895381225}
-  m_Layer: 0
-  m_Name: Celing
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1895381224
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895381223}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07118912, y: 0.64, z: -0.047100067}
-  m_LocalScale: {x: 1.0395726, y: 1.0395727, z: 1.0395726}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1408503948}
-  m_RootOrder: 28
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1895381225
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895381223}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1895381226
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895381223}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1895381227
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895381223}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1955533918
 GameObject:
   m_ObjectHideFlags: 0
@@ -10831,7 +10647,7 @@ GameObject:
   - component: {fileID: 1955533919}
   - component: {fileID: 1955533921}
   - component: {fileID: 1955533920}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11100,7 +10916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2039647203}
   - component: {fileID: 2039647204}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: ShowAccessCode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11146,7 +10962,7 @@ GameObject:
   - component: {fileID: 2047108682}
   - component: {fileID: 2047108684}
   - component: {fileID: 2047108683}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11408,7 +11224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2122513799}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: RobPad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11445,7 +11261,7 @@ GameObject:
   - component: {fileID: 2138907983}
   - component: {fileID: 2138907985}
   - component: {fileID: 2138907984}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

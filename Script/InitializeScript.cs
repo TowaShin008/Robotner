@@ -16,15 +16,5 @@ public class InitializeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        counter++;
-        if(counter>=60)
-        {
-            processTime++;
-        }
-    }
-
-    public int GetProcessTime()
-    {
-        return processTime;
     }
 }

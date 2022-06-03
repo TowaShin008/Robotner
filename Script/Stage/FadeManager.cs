@@ -23,7 +23,7 @@ public class FadeManager : MonoBehaviour
     private static float fadeTime = 1;
 
     //遷移先のシーン
-    private static int nextScene;
+    private static string nextScene;
 
     //フェード用のCanvasとImage生成
     static void Init()
@@ -58,7 +58,7 @@ public class FadeManager : MonoBehaviour
     }
 
     //フェードアウト開始
-    public static void FadeOut(int n)
+    public static void FadeOut(string n)
     {
         if (fadeImage == null) Init();
         nextScene = n;
