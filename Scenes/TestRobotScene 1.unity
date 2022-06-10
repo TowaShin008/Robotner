@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 391610811}
   - component: {fileID: 391610810}
   - component: {fileID: 391610815}
+  - component: {fileID: 391610816}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -379,6 +380,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textObject: {fileID: 344605760}
   textObject2: {fileID: 1454146144}
+--- !u!114 &391610816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391610809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc17d17979925034f998adb670c1c5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robotLight: {fileID: 2076828690}
+  range: 5
+  spotAngle: 80
+  intensity: 15
+  robot: {fileID: 391610809}
 --- !u!1 &408200418
 GameObject:
   m_ObjectHideFlags: 0

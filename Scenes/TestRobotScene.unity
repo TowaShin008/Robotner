@@ -1121,9 +1121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   robotLight: {fileID: 2076828690}
-  range: 8.9
-  spotAngle: 78.17
-  intensity: 203.19
+  range: 5
+  spotAngle: 80
+  intensity: 15
   robot: {fileID: 391610809}
 --- !u!4 &1222774883
 Transform:

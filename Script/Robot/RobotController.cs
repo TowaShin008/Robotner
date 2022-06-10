@@ -21,6 +21,7 @@ public class RobotController : MonoBehaviour
     [SerializeField] private GameObject textObject2;
     private Text textComponent;
     private Text textComponent2;
+    [SerializeField] private GameObject RobotScene;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,8 @@ public class RobotController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(RobotScene.activeInHierarchy == false) { return; }
+
         if (modeAuto == false && isBack == true)
         {
             backCount++;
