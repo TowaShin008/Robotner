@@ -10,20 +10,11 @@ public class InitializeScript : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+        FadeManager.FadeIn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        counter++;
-        if(counter>=60)
-        {
-            processTime++;
-        }
-    }
-
-    public int GetProcessTime()
-    {
-        return processTime;
     }
 }

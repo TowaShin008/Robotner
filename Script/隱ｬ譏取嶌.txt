@@ -1,7 +1,0 @@
-・カメラ
-	-SubCamera追加して(既存の物をコピペ)CameracontrollのCamera Numの数を増やす
-
-・タブレットアプリ
-	-Screenを追加して、UIマネージャーにのGameObjectsに追加
-	 Screen_Menuにボタンを追加して「クリック時（）」のところでChangeScreenを選んで引数にScreen_○○と書く
-
