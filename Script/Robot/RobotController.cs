@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class RobotController : MonoBehaviour
 {
     private Rigidbody rigidbody;
+    float x, z;
     private float speed = 0.02f;
     private bool modeAuto = false;
     private bool modeTurn = false;
@@ -67,14 +68,15 @@ public class RobotController : MonoBehaviour
         {
             vec = Vector3.zero;
         }
-       
 
+        x = Input.GetAxisRaw("Horizontal");
+        z = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.W))
+        if (z > 0)
         {
             MoveForward();
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (z < 0)
         {
             MoveBack();
         }
@@ -84,11 +86,11 @@ public class RobotController : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.A))
+        if (x < 0)
         {
             RotateLeft();
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (x > 0)
         {
             RotateRight();
         }

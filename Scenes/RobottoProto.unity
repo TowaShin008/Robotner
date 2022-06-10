@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 44544000}
   - component: {fileID: 44543999}
   - component: {fileID: 44543998}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (9)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 95379355}
   - component: {fileID: 95379354}
   - component: {fileID: 95379357}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Goal
   m_TagString: Goal
   m_Icon: {fileID: 0}
@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 108893867}
   - component: {fileID: 108893866}
   - component: {fileID: 108893865}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (16)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1069,7 +1069,7 @@ GameObject:
   - component: {fileID: 182967969}
   - component: {fileID: 182967968}
   - component: {fileID: 182967967}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (20)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1740,7 +1740,7 @@ GameObject:
   - component: {fileID: 275302481}
   - component: {fileID: 275302480}
   - component: {fileID: 275302479}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (14)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1905,6 +1905,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb7a6e80c324ce44827511cb763bd87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wayPoints:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  player: {fileID: 0}
+  enemyPos: {fileID: 0}
 --- !u!195 &305032341
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2080,7 +2087,7 @@ GameObject:
   - component: {fileID: 369520940}
   - component: {fileID: 369520939}
   - component: {fileID: 369520938}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (18)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2343,7 +2350,7 @@ GameObject:
   - component: {fileID: 409305394}
   - component: {fileID: 409305393}
   - component: {fileID: 409305392}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Plane (2)
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -2797,7 +2804,7 @@ GameObject:
   - component: {fileID: 478178446}
   - component: {fileID: 478178445}
   - component: {fileID: 478178444}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (24)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3554,7 +3561,7 @@ GameObject:
   - component: {fileID: 572610119}
   - component: {fileID: 572610118}
   - component: {fileID: 572610117}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (17)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3786,7 +3793,7 @@ GameObject:
   - component: {fileID: 577645975}
   - component: {fileID: 577645974}
   - component: {fileID: 577645973}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (10)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4858,7 +4865,7 @@ GameObject:
   - component: {fileID: 901931248}
   - component: {fileID: 901931247}
   - component: {fileID: 901931246}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (15)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5070,7 +5077,7 @@ GameObject:
   - component: {fileID: 953354065}
   - component: {fileID: 953354064}
   - component: {fileID: 953354063}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (13)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5167,7 +5174,7 @@ GameObject:
   - component: {fileID: 973206822}
   - component: {fileID: 973206821}
   - component: {fileID: 973206820}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5874,7 +5881,7 @@ GameObject:
   - component: {fileID: 1196783825}
   - component: {fileID: 1196783824}
   - component: {fileID: 1196783823}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (23)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6422,7 +6429,7 @@ GameObject:
   - component: {fileID: 1264519810}
   - component: {fileID: 1264519809}
   - component: {fileID: 1264519808}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7042,6 +7049,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb7a6e80c324ce44827511cb763bd87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wayPoints:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  player: {fileID: 0}
+  enemyPos: {fileID: 0}
 --- !u!195 &1361896441
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7178,6 +7192,7 @@ MonoBehaviour:
   spotAngle: 80
   intensity: 15
   robot: {fileID: 1723781375}
+  RobotScene: {fileID: 0}
 --- !u!108 &1386242593
 Light:
   m_ObjectHideFlags: 0
@@ -7267,7 +7282,7 @@ GameObject:
   - component: {fileID: 1391556194}
   - component: {fileID: 1391556193}
   - component: {fileID: 1391556192}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (12)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7746,7 +7761,7 @@ GameObject:
   - component: {fileID: 1454890977}
   - component: {fileID: 1454890976}
   - component: {fileID: 1454890975}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7962,7 +7977,7 @@ GameObject:
   - component: {fileID: 1479452821}
   - component: {fileID: 1479452820}
   - component: {fileID: 1479452819}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (22)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8214,7 +8229,7 @@ GameObject:
   - component: {fileID: 1530751604}
   - component: {fileID: 1530751603}
   - component: {fileID: 1530751602}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (8)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9389,7 +9404,7 @@ GameObject:
   - component: {fileID: 1721261088}
   - component: {fileID: 1721261087}
   - component: {fileID: 1721261086}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (19)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9702,6 +9717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textObject: {fileID: 1393414584}
   textObject2: {fileID: 0}
+  RobotScene: {fileID: 0}
 --- !u!1 &1726562705
 GameObject:
   m_ObjectHideFlags: 0
@@ -9714,7 +9730,7 @@ GameObject:
   - component: {fileID: 1726562709}
   - component: {fileID: 1726562708}
   - component: {fileID: 1726562707}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9908,6 +9924,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 2138907982}
   tabletPivot: {fileID: 1597065816}
+  Xsensityvity: 0
+  Ysensityvity: 0
 --- !u!136 &1737415531
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10017,7 +10035,7 @@ GameObject:
   - component: {fileID: 1766872392}
   - component: {fileID: 1766872391}
   - component: {fileID: 1766872390}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10114,7 +10132,7 @@ GameObject:
   - component: {fileID: 1780583110}
   - component: {fileID: 1780583109}
   - component: {fileID: 1780583108}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Plane (1)
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -10293,7 +10311,7 @@ GameObject:
   - component: {fileID: 1819684431}
   - component: {fileID: 1819684430}
   - component: {fileID: 1819684429}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (21)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11164,7 +11182,7 @@ GameObject:
   - component: {fileID: 1955772912}
   - component: {fileID: 1955772911}
   - component: {fileID: 1955772910}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (11)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11477,7 +11495,7 @@ GameObject:
   - component: {fileID: 2066407041}
   - component: {fileID: 2066407040}
   - component: {fileID: 2066407039}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (25)
   m_TagString: Wall
   m_Icon: {fileID: 0}
