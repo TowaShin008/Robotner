@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class RobotController : MonoBehaviour
 {
     private Rigidbody rigidbody;
-    private float speed = 0.02f;
+    float x, z;
+    private float speed = 0.05f;
     private bool modeAuto = false;
     private bool modeTurn = false;
     private bool right = true;
@@ -21,7 +22,9 @@ public class RobotController : MonoBehaviour
     [SerializeField] private GameObject textObject2;
     private Text textComponent;
     private Text textComponent2;
+    [SerializeField] private GameObject RobotScene;
 
+    public float knockback;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,13 +37,22 @@ public class RobotController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (modeAuto == false && isBack == true)
+        if (RobotScene.activeInHierarchy == false) { return; }
+
+        //自動操縦がオンの時、向いている方向に進み続ける
+        if (modeAuto == true)
+        {
+            MoveForward();
+        }
+
+        //自動操縦がオンの時、壁にぶつかったら少しバックする
+        if (/*modeAuto == false &&*/ isBack == true)
         {
             backCount++;
 
             if (backCount <= 30)
             {
-                transform.position -= vec * 2;
+                transform.position -= vec * knockback;
             }
             else
             {
@@ -65,27 +77,30 @@ public class RobotController : MonoBehaviour
             vec = Vector3.zero;
         }
 
+        //ロボットの移動操作
+        x = Input.GetAxisRaw("Horizontal");
+        z = Input.GetAxisRaw("Vertical");
 
-
-        if (Input.GetKey(KeyCode.W))
+        if (z > 0)
         {
             MoveForward();
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (z < 0)
         {
             MoveBack();
         }
+
         if (isBack == false && isTurn == false)
         {
             transform.position += vec;
         }
 
-
-        if (Input.GetKey(KeyCode.A))
+        //ロボットの向きの操作
+        if (x < 0)
         {
             RotateLeft();
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (x > 0)
         {
             RotateRight();
         }
@@ -118,16 +133,11 @@ public class RobotController : MonoBehaviour
     {
         if (collision.gameObject.tag != "Wall") { return; }
 
-        //for (int i = 0; i <= 10; i++)
-        //{
-        //    transform.position -= vec;
-        //}
-
         if (modeAuto == true)
         {
             isBack = true;
             backCount = 0;
-            modeAuto = false;
+            //modeAuto = false;
             textComponent.text = "自動操縦:OFF";
 
             if (modeTurn == true)
