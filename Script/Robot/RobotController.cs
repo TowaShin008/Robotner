@@ -8,7 +8,7 @@ public class RobotController : MonoBehaviour
 {
     private Rigidbody rigidbody;
     float x, z;
-    private float speed = 0.02f;
+    private float speed = 0.05f;
     private bool modeAuto = false;
     private bool modeTurn = false;
     private bool right = true;
@@ -38,6 +38,13 @@ public class RobotController : MonoBehaviour
     {
         if(RobotScene.activeInHierarchy == false) { return; }
 
+        //自動操縦がオンの時、向いている方向に進み続ける
+        if(modeAuto == true)
+        {
+            MoveForward();
+        }
+
+        //自動操縦がオンの時、壁にぶつかったら少しバックする
         if (modeAuto == false && isBack == true)
         {
             backCount++;
@@ -69,6 +76,7 @@ public class RobotController : MonoBehaviour
             vec = Vector3.zero;
         }
 
+        //ロボットの移動操作
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
 
@@ -80,12 +88,13 @@ public class RobotController : MonoBehaviour
         {
             MoveBack();
         }
+
         if (isBack == false && isTurn == false)
         {
             transform.position += vec;
         }
-
-
+      
+        //ロボットの向きの操作
         if (x < 0)
         {
             RotateLeft();
@@ -121,11 +130,6 @@ public class RobotController : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag != "Wall") { return; }
-
-        //for (int i = 0; i <= 10; i++)
-        //{
-        //    transform.position -= vec;
-        //}
 
         if(modeAuto == true)
         {
