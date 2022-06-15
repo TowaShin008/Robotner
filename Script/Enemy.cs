@@ -58,6 +58,17 @@ public class Enemy : MonoBehaviour
 				navMeshAgent.destination = playerPos.transform.position;//プレイヤーに向かって進む		
 				break;//switch文の各パターンの最後につける
 		}
+
+		//レイの当たり判定
+		Ray ray = new Ray(transform.position, transform.forward);
+
+		RaycastHit hit;
+
+		if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+			if (hit.collider.gameObject.tag == "Player")
+				navMeshAgent.destination = playerPos.transform.position;
+		}
 	}
 
     public void OnDetectObject(Collider collider)

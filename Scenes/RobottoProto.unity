@@ -1812,7 +1812,7 @@ MonoBehaviour:
   - {x: -12, y: 0, z: 18}
   - {x: -12, y: 0, z: 7}
   - {x: 0, y: 0, z: 7}
-  player: {fileID: 1737415534}
+  playerPos: {fileID: 1737415534}
   enemyPos: {fileID: 305032346}
 --- !u!195 &305032341
 NavMeshAgent:
@@ -6956,7 +6956,7 @@ MonoBehaviour:
   - {x: -22, y: 0, z: -2}
   - {x: -42, y: 0, z: -2}
   - {x: -42, y: 0, z: 20}
-  player: {fileID: 1737415534}
+  playerPos: {fileID: 1737415534}
   enemyPos: {fileID: 1361896439}
 --- !u!195 &1361896441
 NavMeshAgent:
@@ -9301,11 +9301,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1723781381}
-  - component: {fileID: 1723781380}
   - component: {fileID: 1723781379}
   - component: {fileID: 1723781378}
   - component: {fileID: 1723781377}
   - component: {fileID: 1723781376}
+  - component: {fileID: 1723781382}
   m_Layer: 6
   m_Name: Robot
   m_TagString: Untagged
@@ -9396,14 +9396,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1723781380
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723781375}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1723781381
 Transform:
   m_ObjectHideFlags: 0
@@ -9421,6 +9413,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1723781382
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723781375}
+  m_Mesh: {fileID: 0}
 --- !u!1 &1726562705
 GameObject:
   m_ObjectHideFlags: 0
