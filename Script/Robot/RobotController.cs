@@ -24,9 +24,10 @@ public class RobotController : MonoBehaviour
     private Text textComponent2;
     [SerializeField] private GameObject RobotScene;
 
+    public float knockback;
     // Start is called before the first frame update
     void Start()
-    { 
+    {
         rigidbody = GetComponent<Rigidbody>();
         transmitterCounter = GameObject.Find("TransmitterCounter").GetComponent<TransmitterCounter>();
         textComponent = textObject.GetComponent<Text>();
@@ -36,27 +37,27 @@ public class RobotController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(RobotScene.activeInHierarchy == false) { return; }
+        if (RobotScene.activeInHierarchy == false) { return; }
 
         //自動操縦がオンの時、向いている方向に進み続ける
-        if(modeAuto == true)
+        if (modeAuto == true)
         {
             MoveForward();
         }
 
         //自動操縦がオンの時、壁にぶつかったら少しバックする
-        if (modeAuto == false && isBack == true)
+        if (/*modeAuto == false &&*/ isBack == true)
         {
             backCount++;
 
             if (backCount <= 30)
             {
-                transform.position -= vec * 2;
+                transform.position -= vec * knockback;
             }
             else
             {
                 isBack = false;
-            }            
+            }
         }
         else if (modeAuto == false && isTurn == true)
         {
@@ -93,7 +94,7 @@ public class RobotController : MonoBehaviour
         {
             transform.position += vec;
         }
-      
+
         //ロボットの向きの操作
         if (x < 0)
         {
@@ -118,12 +119,13 @@ public class RobotController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             //rigidbody.AddForce(new Vector3(0, 0, 5));
-            if(transmitterCounter.remaining >= 1) {
+            if (transmitterCounter.remaining >= 1)
+            {
                 GameObject.Find("TransmitterCounter").GetComponent<TransmitterCounter>().SubRemaining();
 
                 GameObject.Find("TransmitterSpawner").GetComponent<TransmitterSpawner>().Spawn();
             }
-            
+
         }
     }
 
@@ -131,11 +133,11 @@ public class RobotController : MonoBehaviour
     {
         if (collision.gameObject.tag != "Wall") { return; }
 
-        if(modeAuto == true)
+        if (modeAuto == true)
         {
             isBack = true;
             backCount = 0;
-            modeAuto = false;
+            //modeAuto = false;
             textComponent.text = "自動操縦:OFF";
 
             if (modeTurn == true)
@@ -143,7 +145,7 @@ public class RobotController : MonoBehaviour
                 RotateRight();
                 modeTurn = false;
                 isTurn = true;
-                turnCount = 0;                
+                turnCount = 0;
                 textComponent2.text = "回転:OFF";
             }
         }
@@ -171,11 +173,13 @@ public class RobotController : MonoBehaviour
 
     public void ModeAutoOnOff()
     {
-        if(modeAuto == false) { 
+        if (modeAuto == false)
+        {
             modeAuto = true;
             textComponent.text = "自動操縦:ON";
         }
-        else { 
+        else
+        {
             modeAuto = false;
             textComponent.text = "自動操縦:OFF";
         }

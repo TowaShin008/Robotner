@@ -2167,6 +2167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robotCamera: {fileID: 1605947125}
   robot: {fileID: 1723781375}
+  shiftY: 0
 --- !u!1 &318323188
 GameObject:
   m_ObjectHideFlags: 0
@@ -7936,6 +7937,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2388174f702102d4b9817f7c59efdb06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameObject1: {fileID: 0}
+  gameObject2: {fileID: 0}
 --- !u!114 &1128203884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8622,6 +8625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1218933917}
   - component: {fileID: 1218933918}
+  - component: {fileID: 1218933919}
   m_Layer: 7
   m_Name: AccessCode
   m_TagString: Untagged
@@ -8636,12 +8640,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218933916}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0026191175, y: 0.3603623, z: 0.92873216}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -3.9026191, y: -0.2796377, z: -0.92873216}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2122513799}
+  m_Father: {fileID: 1723781381}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1218933918
@@ -8657,6 +8661,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accessCodeNumber: -1
+--- !u!114 &1218933919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218933916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476da5e248e733b4b8ea9d3bbb50c4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1264436007
 GameObject:
   m_ObjectHideFlags: 0
@@ -9517,6 +9533,7 @@ MonoBehaviour:
   stages:
   - {fileID: 1408503947}
   stageY: -10
+  setStage: -1
 --- !u!4 &1346694180
 Transform:
   m_ObjectHideFlags: 0
@@ -11160,7 +11177,7 @@ Transform:
   - {fileID: 1028410668}
   - {fileID: 1269114710}
   m_Father: {fileID: 2122513799}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!114 &1597065818
 MonoBehaviour:
@@ -12646,6 +12663,7 @@ GameObject:
   - component: {fileID: 1723781377}
   - component: {fileID: 1723781382}
   - component: {fileID: 1723781383}
+  - component: {fileID: 1723781384}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -12746,6 +12764,7 @@ Transform:
   m_Children:
   - {fileID: 745072583}
   - {fileID: 1474323892}
+  - {fileID: 1218933917}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12764,6 +12783,7 @@ MonoBehaviour:
   textObject: {fileID: 0}
   textObject2: {fileID: 0}
   RobotScene: {fileID: 1657060906}
+  knockback: 0
 --- !u!114 &1723781383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12782,6 +12802,21 @@ MonoBehaviour:
   intensity: 15
   robot: {fileID: 1723781375}
   RobotScene: {fileID: 1657060906}
+--- !u!114 &1723781384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723781375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d57880a56f92774a90cd15d7531ec2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robPad: {fileID: 2122513798}
+  robot: {fileID: 1723781375}
+  accessCode: {fileID: 1218933916}
 --- !u!1 &1726562705
 GameObject:
   m_ObjectHideFlags: 0
@@ -14898,7 +14933,6 @@ Transform:
   m_Children:
   - {fileID: 1564524143}
   - {fileID: 1857086662}
-  - {fileID: 1218933917}
   - {fileID: 1597065817}
   m_Father: {fileID: 1737415534}
   m_RootOrder: 1
