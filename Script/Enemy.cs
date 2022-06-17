@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
 
-	//巡回する4箇所のポイント
+    //巡回する4箇所のポイント
     public Vector3[] wayPoints = new Vector3[4];
 	//現在の目的の座標
     private int currentRoot;
@@ -18,64 +18,155 @@ public class Enemy : MonoBehaviour
 	//エネミーのポジション
     public Transform enemyPos;
 
-    private void Start()
+	private bool stopFlag;
+	private bool sphereCollisionFlag;
+    private bool rayCollisionFlag;
+    private int stopTimer = 60;
+	private bool jumpFlag = false;
+
+	private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-    }
+        stopFlag = false;
+		sphereCollisionFlag = false;
+        rayCollisionFlag = false;
+        stopTimer = 60;
+	}
 
     void Update()
     {
 		Vector3 pos = wayPoints[currentRoot];//Vector3型のposに現在の目的地の座標を代入
 		float distance = Vector3.Distance(enemyPos.position, playerPos.transform.position);//敵とプレイヤーの距離を求める
 
-		if (distance > 5)
-		{//もしプレイヤーと敵の距離が5以上なら
-			mode = 0;//Modeを0にする
-		}
 
-		if (distance < 5)
-		{//もしプレイヤーと敵の距離が5以下なら
-			mode = 1;//Modeを1にする
-		}
 
-		switch (mode)
+        if (sphereCollisionFlag == false && rayCollisionFlag == false)
+        {
+            navMeshAgent.isStopped = false;
+            navMeshAgent.updatePosition = true;
+            stopFlag = false;
+            //stopTimer = 60;
+            mode = 0;//Modeを0にする
+		}
+        else
+        {
+			mode = 1;
+            if (stopFlag == false)
+            {
+                StopProcessing();
+            }
+            //else
+            //{
+            //    navMeshAgent.isStopped = true;
+            //    navMeshAgent.updatePosition = false;
+            //}
+        }
+
+        //if (sphereCollisionFlag || rayCollisionFlag)
+        //{
+
+        //}
+
+        sphereCollisionFlag = false;
+        rayCollisionFlag = false;
+
+        switch (mode)
 		{//Modeの切り替えは
 
 			case 0://case0の場合
 
-				if (Vector3.Distance(transform.position, pos) < 1f)
-				{//もし敵の位置と現在の目的地との距離が1以下なら
-					currentRoot += 1;//currentRootを+1する
-					if (currentRoot > wayPoints.Length - 1)
-					{//もしcurrentRootがwayPointsの要素数-1より大きいなら
-						currentRoot = 0;//currentRootを0にする
-					}
-				}
-				GetComponent<NavMeshAgent>().SetDestination(pos);//NavMeshAgentの情報を取得し目的地をposにする
-				break;//switch文の各パターンの最後につける
+                if (Vector3.Distance(transform.position, pos) < 1f)
+                {//もし敵の位置と現在の目的地との距離が1以下なら
+                    currentRoot += 1;//currentRootを+1する
+                    stopTimer = 60;
+                    if (currentRoot > wayPoints.Length - 1)
+                    {//もしcurrentRootがwayPointsの要素数-1より大きいなら
+                        currentRoot = 0;//currentRootを0にする
+                    }
+                }
+                GetComponent<NavMeshAgent>().SetDestination(pos);//NavMeshAgentの情報を取得し目的地をposにする
+
+                break;//switch文の各パターンの最後につける
 
 			case 1://case1の場合
-				navMeshAgent.destination = playerPos.transform.position;//プレイヤーに向かって進む		
-				break;//switch文の各パターンの最後につける
+
+                if (stopFlag)
+                {
+                    navMeshAgent.destination = playerPos.transform.position;
+                }
+                break;//switch文の各パターンの最後につける
 		}
 
-		//レイの当たり判定
-		Ray ray = new Ray(transform.position, transform.forward);
+        //     if (sphereCollisionFlag==false && rayCollisionFlag == false)
+        //     {
+        //stopFlag = false;
+        //     }
+        //     else
 
-		RaycastHit hit;
 
-		if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+        //レイの当たり判定
+        Ray ray = new Ray(transform.position, transform.forward);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-			if (hit.collider.gameObject.tag == "Player")
-				navMeshAgent.destination = playerPos.transform.position;
-		}
-	}
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                rayCollisionFlag = true;
+                //navMeshAgent.updatePosition = true;
+                //if (stopFlag)
+                //{
+                //    navMeshAgent.destination = playerPos.transform.position;
+                //}
+            }
+        }
+    }
 
-    public void OnDetectObject(Collider collider)
+	public void OnDetectObject(Collider collider)
     {
         if(collider.CompareTag("Player"))
         {
-            navMeshAgent.destination = collider.transform.position;
+            sphereCollisionFlag = true;
+			//navMeshAgent.updatePosition = true;
+			//if (stopFlag)
+			//{
+			//	navMeshAgent.destination = playerPos.transform.position;
+			//}
+		}
+    }
+	//発見の演出処理
+	public void StopProcessing()
+    {
+		navMeshAgent.isStopped = true;
+		//navMeshAgent.updatePosition = false;
+
+		if(stopTimer<0)
+        {
+			
+			//Rigidbody rigidbody = GetComponent<Rigidbody>();
+			//rigidbody.isKinematic = false;
+			navMeshAgent.isStopped = false;
+			navMeshAgent.updatePosition = true;
+            Rigidbody rigidbody = GetComponent<Rigidbody>();
+            rigidbody.isKinematic = false;
+            stopFlag = true;
         }
+        else
+        {
+            //if(stopTimer==60)
+            //{
+            //    JumpProcessing();
+            //}
+			stopTimer--;
+        }
+
+	}
+
+	public void JumpProcessing()
+    {
+		Rigidbody rigidbody = GetComponent<Rigidbody>();
+		rigidbody.isKinematic = true;
+		rigidbody.AddForce(transform.up * 1000);
     }
 }
