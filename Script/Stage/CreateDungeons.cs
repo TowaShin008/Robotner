@@ -6,6 +6,8 @@ public class CreateDungeons : MonoBehaviour
 {
     public GameObject cube;
     public GameObject plane;
+
+    [Range(0, 1)] public int paint = 0;
     [TooltipAttribute("Šï”‚Ì‚İ"), Range(5, 50)] public int x, z;
     [TooltipAttribute("•”‰®‚ÌÅ‘å‚Ì‘å‚«‚³(¡‚Í‹ô”‚Ì‚İ‚©‚à)"), Range(2, 10)] public int roomMaxScale;
     [TooltipAttribute("ƒ‰ƒ“ƒ_ƒ€‚È•”‰®‚Ì”(‰º‚Ìİ’è‚ª–³Œø‚Æ‚È‚è‚Ü‚·)")] public bool randomRoomN;
@@ -150,7 +152,7 @@ public class CreateDungeons : MonoBehaviour
         {
             for (int n = 0; n < x; n++)
             {
-                if (mapChip[n, i] == 1)//
+                if (mapChip[n, i] == paint)//
                 {
                     GameObject obj = Instantiate(cube);
                     Vector3 pos = obj.transform.position;
