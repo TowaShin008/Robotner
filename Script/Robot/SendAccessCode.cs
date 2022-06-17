@@ -4,16 +4,28 @@ using UnityEngine;
 
 public class SendAccessCode : MonoBehaviour
 {
+    //パッド、ロボット、アクセスコードの順でオブジェクトを入れる
     public GameObject robPad;
     public GameObject robot;
     public GameObject accessCode;
+    GameObject clone;
+
+    [SerializeField] private float needTime = 20.0f;
+
+    //sendの過去形アクセスコードを送り済みか
+    bool sent = false;
+    
+    //計測の開始時間を格納する変数
+    private float start;
+    //経過時間を格納する変数
+    private float elapsedTime; 
 
     RaycastHit hit;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        sent = false;
     }
 
     // Update is called once per frame
@@ -25,27 +37,33 @@ public class SendAccessCode : MonoBehaviour
         Ray robotRay = new Ray(robot.transform.position, robot.transform.forward);
 
         Debug.DrawRay(robotRay.origin, robotRay.direction * 10, Color.red, 5);
-       
-        //if (Physics.Raycast(robotRay, out hit, 5.0f))
-        //{
-        //    Debug.Log(hit.transform.gameObject.name);
-        //    
-        //    if (Input.GetKeyDown(KeyCode.V) && hit.collider.CompareTag("Player"))
-        //    {
-        //        SendCode();
-        //    }
-        //}
-
+               
         //　Cubeのレイを飛ばしターゲットと接触しているか判定
         if (Physics.BoxCast(robot.transform.position, Vector3.one * 1.0f, robot.transform.forward, out hit, Quaternion.identity, 5.0f))
         {
             Debug.Log(hit.transform.gameObject.name);
-
-            if (Input.GetKeyDown(KeyCode.V) && hit.collider.CompareTag("Player"))
+            if (hit.collider.CompareTag("Player"))
             {
+                elapsedTime = Time.time - start;
+            }
+            else
+            {
+                start = Time.time;
+            }
+
+            //if (Input.GetKeyDown(KeyCode.V) && hit.collider.CompareTag("Player"))
+            //{
+            //    SendCode();
+            //}
+
+            if (elapsedTime >= needTime && sent == false)
+            {
+                sent = true;
                 SendCode();
             }
         }
+
+        Debug.Log(elapsedTime);
     }
 
     private void OnDrawGizmos()
@@ -56,6 +74,8 @@ public class SendAccessCode : MonoBehaviour
 
     public void SendCode()
     {
+        clone = Instantiate(accessCode, accessCode.transform);
+        clone.transform.parent = robot.transform;
         accessCode.transform.parent = robPad.transform;
     }
 }
