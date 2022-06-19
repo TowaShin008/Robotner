@@ -1,0 +1,22 @@
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd D0F90184-A7BB-4F4B-8328-1054BFEBBD24.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl blinn2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd What_Was_Broken_Is_Now_Shattered_-_Not_Anymore.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00

@@ -13,18 +13,23 @@ public class FPSController : MonoBehaviour
     public GameObject cam;
     Quaternion cameraRot, characterRot;
 
+    //タブレットを回転する基準点
     public GameObject tabletPivot;
     Quaternion tabletPivotRot;
 
     bool tabletPowerFlag;
 
-    float Xsensityvity = 3f, Ysensityvity = 3f;
+    //XY方向の視点感度
+     public float Xsensityvity, Ysensityvity;
 
-    bool cursorLock = true;
+    bool deadFlag;
 
     //変数の宣言(角度の制限用)
-    float minX = -90f, maxX = 90f;
-
+    float minX;
+    float maxX;
+    bool checkController;
+    float yRot;
+    float xRot;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,63 +40,96 @@ public class FPSController : MonoBehaviour
         characterRot = transform.localRotation;
         tabletPivotRot = tabletPivot.transform.localRotation;
         tabletPowerFlag = false;
+        deadFlag = false;
+        const float normalMaxX = 90f;
+        const float normalMinX = -90f;
+        minX = normalMinX;
+        maxX = normalMaxX;
+        //コントローラー接続確認
+        var controllerNames = Input.GetJoystickNames();
+
+        //何も接続されていないならマウスの処理
+        if (controllerNames[0] == "")
+        {
+            //接続されてないからマウス
+            checkController = false;
+        }
+        else
+        {
+            //接続されてたらコントローラー
+            checkController = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
-        float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
-
+        checkController = true;   
+        float x = Input.GetAxis("lightJoyStickX");
+        float y = Input.GetAxis("lightJoyStickY");
+        if (checkController)
+        {
+            if (y != 0)
+            {
+                yRot = -y* Xsensityvity;
+            }
+            else 
+            {
+                yRot = y;
+            }
+        }
+        else
+        {
+            yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
+        }
         cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-        characterRot *= Quaternion.Euler(0, xRot, 0);
 
         //Updateの中で作成した関数を呼ぶ
         cameraRot = ClampRotation(cameraRot);
 
         cam.transform.localRotation = cameraRot;
-        transform.localRotation = characterRot;
 
-        //カーソルの固定処理
-        UpdateCursorLock();
+        //タブレット起動時のみ視点の横移動を制限
+        if (tabletPowerFlag == false)
+        {
+            if (checkController)
+            {
+                if (x != 0)
+                {
+                    xRot = x * Ysensityvity;
+                }
+                else
+                {
+                    xRot = x;
+                }
+            }
+            else
+            {
+
+                xRot = Input.GetAxis("Mouse X") * Ysensityvity;
+            }
+            characterRot *= Quaternion.Euler(0, xRot, 0);
+            transform.localRotation = characterRot;
+        }
+
 
         //タブレットの操作処理
         TabletProcessing();
-
-        //左に移動
-        if(Input.GetKey(KeyCode.A))
-        {
-            this.transform.Translate(-0.01f, 0.0f, 0.0f);
-        }
-        //右に移動
-        if(Input.GetKey(KeyCode.D))
-        {
-            this.transform.Translate(0.01f, 0.0f, 0.0f);
-        }
-        //上に移動
-        if (Input.GetKey(KeyCode.W))
-        {
-            this.transform.Translate(0.0f, 0.0f, 0.01f);
-        }
-        //下に移動
-        if (Input.GetKey(KeyCode.S))
-        {
-            this.transform.Translate(0.0f, 0.0f, -0.01f);
-        }
-        characterPos = this.transform.position;
-        characterPos.y = playerBasePosY;
-        this.transform.position = characterPos;
     }
 
     //タブレットの操作処理
     private void TabletProcessing()
     {
-        if(tabletPowerFlag)
+        if (tabletPowerFlag)
         {
-            if(TabletBootProcessing())
-            {
-                if (Input.GetKey(KeyCode.E))
+            if (TabletBootProcessing())
+            {//完全に起動している場合のみシャットダウンを受け付ける
+                if (Input.GetKey(KeyCode.Tab))
                 {
+                    const float normalMaxX = 90f;
+                    const float normalMinX = -90f;
+                    minX = normalMinX;
+                    maxX = normalMaxX;
                     tabletPowerFlag = false;
                 }
             }
@@ -99,15 +137,19 @@ public class FPSController : MonoBehaviour
         else
         {
             if (TabletShutDownProcessing())
-            {
-                if (Input.GetKey(KeyCode.E))
+            {//完全にシャットダウンしている場合のみ起動を受け付ける
+                if (Input.GetKey(KeyCode.Tab))
                 {
+                    const float tabletMaxX = 5f;
+                    const float tabletMinX = -5f;
+                    minX = tabletMinX;
+                    maxX = tabletMaxX;
                     tabletPowerFlag = true;
                 }
             }
         }
     }
-
+    //タブレットの起動処理
     private bool TabletBootProcessing()
     {
         tabletPivot.transform.localRotation.ToAngleAxis(out float angle, out Vector3 axis);
@@ -124,7 +166,7 @@ public class FPSController : MonoBehaviour
 
         return false;
     }
-
+    //タブレットのシャットダウン処理
     private bool TabletShutDownProcessing()
     {
         tabletPivot.transform.localRotation.ToAngleAxis(out float angle, out Vector3 axis);
@@ -138,44 +180,27 @@ public class FPSController : MonoBehaviour
             tabletPivotRot *= rot;
             tabletPivot.transform.localRotation = tabletPivotRot;
         }
-
         return false;
     }
 
     private void FixedUpdate()
     {
+        if (tabletPowerFlag) { return; }
+
         x = 0;
         z = 0;
 
+        //プレイヤー移動処理
         x = Input.GetAxisRaw("Horizontal") * speed;
         z = Input.GetAxisRaw("Vertical") * speed;
 
-        //transform.position += new Vector3(x,0,z);
+        characterPos = this.transform.position;
+
+        //プレイヤーが浮かないように一定の高さで固定(Y軸のポジションを固定)
+        characterPos.y = playerBasePosY;
+        this.transform.position = characterPos;
 
         transform.position += cam.transform.forward * z + cam.transform.right * x;
-    }
-
-
-    public void UpdateCursorLock()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            cursorLock = false;
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            cursorLock = true;
-        }
-
-
-        if (cursorLock)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else if (!cursorLock)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
     }
 
     //角度制限関数の作成
@@ -199,9 +224,10 @@ public class FPSController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name=="Enemy")
+        if (collision.gameObject.name == "Enemy")
         {
             Debug.Log("Hit");
+            deadFlag = true;
         }
     }
 }
