@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Rendering;
 
-public class SampleClick : MonoBehaviour
+public class LightSlider : MonoBehaviour
 {
+
+    public Slider slider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,12 +18,8 @@ public class SampleClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        RenderSettings.ambientIntensity = slider.value;
     }
 
-    public void OnClickFade()
-    {
-        //UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
-    }
+
 }

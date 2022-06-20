@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SampleClick : MonoBehaviour
+public class ChangeNumber : MonoBehaviour
 {
+
+    public Slider slider;
+    private float speed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,12 +18,7 @@ public class SampleClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    public void OnClickFade()
-    {
-        //UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
+        speed = slider.value;
+        this.transform.Translate(speed, 0, 0, 0);
     }
 }
