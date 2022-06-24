@@ -82,12 +82,6 @@ public class FPSController : MonoBehaviour
                 squatFlag = false;
             }
         }
-
-        if(squatFlag)
-        {
-            //プレイヤーのしゃがむ処理
-            SquatProcessing();
-        }
         //タブレットの操作処理
         TabletProcessing();
     }
@@ -100,7 +94,7 @@ public class FPSController : MonoBehaviour
             if (TabletBootProcessing())
             {//完全に起動している場合のみシャットダウンを受け付ける
                 if (Input.GetKey(KeyCode.Tab))
-                {
+                {//タブレット未起動時の視点操作範囲に変更
                     const float normalMaxX = 90f;
                     const float normalMinX = -90f;
                     minX = normalMinX;
@@ -114,7 +108,7 @@ public class FPSController : MonoBehaviour
             if (TabletShutDownProcessing())
             {//完全にシャットダウンしている場合のみ起動を受け付ける
                 if (Input.GetKey(KeyCode.Tab))
-                {
+                {//タブレット起動時の視点操作範囲に変更
                     const float tabletMaxX = 0.0f;
                     const float tabletMinX = 0.0f;
                     minX = tabletMinX;
@@ -173,11 +167,11 @@ public class FPSController : MonoBehaviour
 
         //プレイヤーが浮かないように一定の高さで固定(Y軸のポジションを固定)
         if(squatFlag)
-        {
+        {//しゃがみ時の基本ポジション
             characterPos.y = playerBaseSquatPosY;
         }
         else
-        {
+        {//通常時の基本ポジション
             characterPos.y = playerBasePosY;
         }
 
@@ -212,12 +206,6 @@ public class FPSController : MonoBehaviour
             Debug.Log("Hit");
             deadFlag = true;
         }
-    }
-
-    //プレイヤーのしゃがむ処理
-    private void SquatProcessing()
-    {
-
     }
 
     public bool GetSquatFlag()

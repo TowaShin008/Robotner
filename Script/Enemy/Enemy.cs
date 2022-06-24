@@ -15,14 +15,11 @@ public class Enemy : MonoBehaviour
     private int mode;
     //プレイヤーのポジション
     public GameObject playerObject;
-    //エネミーのポジション
-    public Transform enemyPos;
 
     private bool stopFlag;
     private bool sphereCollisionFlag;
     private bool rayCollisionFlag;
     private int stopTimer = 60;
-    private bool jumpFlag = false;
 
     public AudioClip clip;
     private void Start()
@@ -37,18 +34,16 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Vector3 pos = wayPoints[currentRoot];//Vector3型のposに現在の目的地の座標を代入
-        float distance = Vector3.Distance(enemyPos.position, playerObject.transform.position);//敵とプレイヤーの距離を求める
-
-
+        float distance = Vector3.Distance(this.transform.position, playerObject.transform.position);//敵とプレイヤーの距離を求める
 
         if (sphereCollisionFlag == false && rayCollisionFlag == false)
         {
             navMeshAgent.isStopped = false;
             navMeshAgent.updatePosition = true;
             stopFlag = false;
-            
+
             //プレイヤーがしゃがんでいたら巡回モードに移行
-            if (playerObject.GetComponent<FPSController>().GetSquatFlag())
+            if (playerObject.GetComponent<FPSController>().GetSquatFlag()) 
             {
                 mode = 0;//Modeを0にする
             }
@@ -84,12 +79,12 @@ public class Enemy : MonoBehaviour
                 break;//switch文の各パターンの最後につける
 
             case 1://case1の場合
-
+                //停止演出が終わったら追跡の開始
                 if (stopFlag)
                 {
                     navMeshAgent.destination = playerObject.transform.position;
                 }
-                break;//switch文の各パターンの最後につける
+                break;
         }
 
         //レイの当たり判定
@@ -134,13 +129,5 @@ public class Enemy : MonoBehaviour
             }
             stopTimer--;
         }
-
-    }
-
-    public void JumpProcessing()
-    {
-        Rigidbody rigidbody = GetComponent<Rigidbody>();
-        rigidbody.isKinematic = true;
-        rigidbody.AddForce(transform.up * 1000);
     }
 }
