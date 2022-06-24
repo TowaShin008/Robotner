@@ -113,7 +113,9 @@ public class Enemy : MonoBehaviour
     {
         navMeshAgent.isStopped = true;
 
-        if (stopTimer < 0)
+        bool timeOut = stopTimer < 0;
+
+        if (timeOut)
         {
             navMeshAgent.isStopped = false;
             navMeshAgent.updatePosition = true;

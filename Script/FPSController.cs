@@ -72,7 +72,7 @@ public class FPSController : MonoBehaviour
 
         //プレイヤーのしゃがむ入力処理
         if(Input.GetKeyDown(KeyCode.LeftControl))
-        {
+        {//しゃがんでいるかのフラグ切り替え
             if(squatFlag==false)
             {
                 squatFlag = true;
@@ -95,10 +95,10 @@ public class FPSController : MonoBehaviour
             {//完全に起動している場合のみシャットダウンを受け付ける
                 if (Input.GetKey(KeyCode.Tab))
                 {//タブレット未起動時の視点操作範囲に変更
-                    const float normalMaxX = 90f;
-                    const float normalMinX = -90f;
-                    minX = normalMinX;
-                    maxX = normalMaxX;
+                    const float normalMaxAngleX = 90f;
+                    const float normalMinAngleX = -90f;
+                    minX = normalMinAngleX;
+                    maxX = normalMaxAngleX;
                     tabletPowerFlag = false;
                 }
             }
@@ -109,10 +109,10 @@ public class FPSController : MonoBehaviour
             {//完全にシャットダウンしている場合のみ起動を受け付ける
                 if (Input.GetKey(KeyCode.Tab))
                 {//タブレット起動時の視点操作範囲に変更
-                    const float tabletMaxX = 0.0f;
-                    const float tabletMinX = 0.0f;
-                    minX = tabletMinX;
-                    maxX = tabletMaxX;
+                    const float tabletMaxAngleX = 0.0f;
+                    const float tabletMinAngleX = 0.0f;
+                    minX = tabletMinAngleX;
+                    maxX = tabletMaxAngleX;
                     tabletPowerFlag = true;
                 }
             }
@@ -122,7 +122,9 @@ public class FPSController : MonoBehaviour
     private bool TabletBootProcessing()
     {
         tabletPivot.transform.localRotation.ToAngleAxis(out float angle, out Vector3 axis);
-        if (angle <= 0.0f)
+
+        bool endAngle = angle <= 0.0f;
+        if (endAngle)
         {
             return true;
         }
@@ -139,7 +141,9 @@ public class FPSController : MonoBehaviour
     private bool TabletShutDownProcessing()
     {
         tabletPivot.transform.localRotation.ToAngleAxis(out float angle, out Vector3 axis);
-        if (angle >= 180.0f)
+
+        bool endAngle = angle >= 180.0f;
+        if (endAngle)
         {
             return true;
         }
