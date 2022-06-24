@@ -9,6 +9,7 @@ public class FPSController : MonoBehaviour
 
     Vector3 characterPos;
     float playerBasePosY;
+    float playerBaseSquatPosY;
 
     public GameObject cam;
     Quaternion cameraRot, characterRot;
@@ -20,13 +21,15 @@ public class FPSController : MonoBehaviour
     bool tabletPowerFlag;
 
     //XY方向の視点感度
-    float Xsensityvity = 3f, Ysensityvity = 3f;
+     public float Xsensityvity, Ysensityvity;
 
     bool deadFlag;
 
     //変数の宣言(角度の制限用)
     float minX;
     float maxX;
+
+    bool squatFlag;
 
     // Start is called before the first frame update
     void Start()
@@ -35,10 +38,12 @@ public class FPSController : MonoBehaviour
         cameraRot = cam.transform.localRotation;
         characterPos = transform.position;
         playerBasePosY = characterPos.y;
+        playerBaseSquatPosY = playerBasePosY - 1.0f;
         characterRot = transform.localRotation;
         tabletPivotRot = tabletPivot.transform.localRotation;
         tabletPowerFlag = false;
         deadFlag = false;
+        squatFlag = false;
         const float normalMaxX = 90f;
         const float normalMinX = -90f;
         minX = normalMinX;
@@ -65,7 +70,24 @@ public class FPSController : MonoBehaviour
             transform.localRotation = characterRot;
         }
 
+        //プレイヤーのしゃがむ入力処理
+        if(Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            if(squatFlag==false)
+            {
+                squatFlag = true;
+            }
+            else
+            {
+                squatFlag = false;
+            }
+        }
 
+        if(squatFlag)
+        {
+            //プレイヤーのしゃがむ処理
+            SquatProcessing();
+        }
         //タブレットの操作処理
         TabletProcessing();
     }
@@ -93,8 +115,8 @@ public class FPSController : MonoBehaviour
             {//完全にシャットダウンしている場合のみ起動を受け付ける
                 if (Input.GetKey(KeyCode.Tab))
                 {
-                    const float tabletMaxX = 5f;
-                    const float tabletMinX = -5f;
+                    const float tabletMaxX = 0.0f;
+                    const float tabletMinX = 0.0f;
                     minX = tabletMinX;
                     maxX = tabletMaxX;
                     tabletPowerFlag = true;
@@ -150,7 +172,15 @@ public class FPSController : MonoBehaviour
         characterPos = this.transform.position;
 
         //プレイヤーが浮かないように一定の高さで固定(Y軸のポジションを固定)
-        characterPos.y = playerBasePosY;
+        if(squatFlag)
+        {
+            characterPos.y = playerBaseSquatPosY;
+        }
+        else
+        {
+            characterPos.y = playerBasePosY;
+        }
+
         this.transform.position = characterPos;
 
         transform.position += cam.transform.forward * z + cam.transform.right * x;
@@ -182,5 +212,21 @@ public class FPSController : MonoBehaviour
             Debug.Log("Hit");
             deadFlag = true;
         }
+    }
+
+    //プレイヤーのしゃがむ処理
+    private void SquatProcessing()
+    {
+
+    }
+
+    public bool GetSquatFlag()
+    {
+        return squatFlag;
+    }
+
+    public void SetSquatFlag(bool arg_squatFlag)
+    {
+        squatFlag = arg_squatFlag;
     }
 }

@@ -9,11 +9,16 @@ public class SelectStageScript : MonoBehaviour
     private bool starting = false;
     public float stageY;
     private GameObject nowStage;
+    public int setStage = -1;
 
     // Start is called before the first frame update
     void Start()
     {
-        int num = Random.Range(0, stages.Count);
+        int num = setStage;
+        if (setStage == -1)
+        {
+            num = Random.Range(0, stages.Count);
+        }
         nowStage = Object.Instantiate(stages[num]) as GameObject;
 
         nowStage.name = "mapStage";

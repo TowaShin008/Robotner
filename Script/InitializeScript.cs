@@ -4,26 +4,24 @@ using UnityEngine;
 
 public class InitializeScript : MonoBehaviour
 {
+    public GameObject gameObject1;
+    public GameObject gameObject2;
     private int processTime = 0;
     private int counter = 0;
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
+        FadeManager.FadeIn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        counter++;
-        if(counter>=60)
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            processTime++;
+            gameObject1.SetActive(false);
+            gameObject2.SetActive(false);
         }
-    }
-
-    public int GetProcessTime()
-    {
-        return processTime;
     }
 }
