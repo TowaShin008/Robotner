@@ -14,6 +14,7 @@ public class RobotController : MonoBehaviour
     private bool right = true;
     private bool isBack = false;
     private bool isTurn = false;
+    [SerializeField] private bool isBreak = false;
     private int turnCount = 0;
     private int backCount = 0;
     private Vector3 vec = Vector3.zero;
@@ -37,7 +38,13 @@ public class RobotController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (RobotScene.activeInHierarchy == false) { return; }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            ModeBreakOnOff();
+        }
+        if (isBreak != false) { return; }
 
         //©“®‘€c‚ªƒIƒ“‚ÌAŒü‚¢‚Ä‚¢‚é•ûŒü‚Éi‚İ‘±‚¯‚é
         if (modeAuto == true)
@@ -129,6 +136,16 @@ public class RobotController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag != "Enemy") { return; }
+        if (isBreak == false)
+        {
+            ModeBreakOnOff();
+        }
+
+    }
+
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag != "Wall") { return; }
@@ -195,6 +212,18 @@ public class RobotController : MonoBehaviour
         {
             modeTurn = true;
             textComponent2.text = "‰ñ“]:ON";
+        }
+    }
+
+    public void ModeBreakOnOff()
+    {
+        if (isBreak == true)
+        {
+            isBreak = false;
+        }
+        else
+        {
+            isBreak = true;
         }
     }
 }
