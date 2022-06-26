@@ -27,6 +27,7 @@ public class FPSController : MonoBehaviour
     //変数の宣言(角度の制限用)
     float minX;
     float maxX;
+
     bool checkController;
     float yRot;
     float xRot;
@@ -59,21 +60,22 @@ public class FPSController : MonoBehaviour
             //接続されてたらコントローラー
             checkController = true;
         }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        checkController = true;   
+        checkController = true;
         float x = Input.GetAxis("lightJoyStickX");
         float y = Input.GetAxis("lightJoyStickY");
         if (checkController)
         {
             if (y != 0)
             {
-                yRot = -y* Xsensityvity;
+                yRot = -y * Xsensityvity;
             }
-            else 
+            else
             {
                 yRot = y;
             }
@@ -124,7 +126,7 @@ public class FPSController : MonoBehaviour
         {
             if (TabletBootProcessing())
             {//完全に起動している場合のみシャットダウンを受け付ける
-                if (Input.GetKey(KeyCode.Tab))
+                if (Input.GetKey(KeyCode.Tab)||Input.GetKeyDown("joystick button 0"))
                 {
                     const float normalMaxX = 90f;
                     const float normalMinX = -90f;
@@ -138,7 +140,7 @@ public class FPSController : MonoBehaviour
         {
             if (TabletShutDownProcessing())
             {//完全にシャットダウンしている場合のみ起動を受け付ける
-                if (Input.GetKey(KeyCode.Tab))
+                if (Input.GetKey(KeyCode.Tab) || Input.GetKeyDown("joystick button 0"))
                 {
                     const float tabletMaxX = 5f;
                     const float tabletMinX = -5f;

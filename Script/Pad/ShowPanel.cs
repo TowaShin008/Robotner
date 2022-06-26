@@ -33,7 +33,7 @@ public class ShowPanel : MonoBehaviour
     {
         if (!padFlag)
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown("joystick button 0"))
             {
                 pad.SetActive(!pad.activeSelf);
                 padFlag = !padFlag;
@@ -55,7 +55,7 @@ public class ShowPanel : MonoBehaviour
 
             }
 
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(KeyCode.Tab)||Input.GetKeyDown("joystick button 0"))
             {
                 count = 0;
             }
