@@ -5,7 +5,7 @@ using UnityEngine;
 public class ElectricityManager : MonoBehaviour
 {
     //停電までの時間（固定）
-    const float maxoffTime = 10;
+    [SerializeField]  float maxoffTime = 10;
     //停電までの経過時間
     float offElectricityTiem;
     //停電状態
@@ -16,6 +16,8 @@ public class ElectricityManager : MonoBehaviour
     [SerializeField] GameObject shutter;
     [SerializeField] int lightNum;
     [SerializeField] int electNum;
+    //現在起動中のブレーカー
+    int nowActiveElectricity = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,8 @@ public class ElectricityManager : MonoBehaviour
                 {
                     lightObject[i].SetActive(true);
                 }
+                //ブレーカー切り替え
+                NowBreakerChange();
             }
         }
     }
@@ -76,6 +80,27 @@ public class ElectricityManager : MonoBehaviour
             for (int i = 0; i < lightNum; i++)
             {
                 lightObject[i].SetActive(false);
+            }
+        }
+    }
+    void NowBreakerChange() 
+    {
+        //次のアクティブへ切り替え
+        nowActiveElectricity++;
+        if (nowActiveElectricity == electNum)
+        {
+            nowActiveElectricity = 0;
+        }
+        //ブレーカーのアクティブ切り替え
+        for (int i = 0; i < electNum; i++)
+        {
+            if (i == nowActiveElectricity)
+            {
+                electricity[i].SetActive(true);
+            }
+            else
+            {
+                electricity[i].SetActive(false);
             }
         }
     }
