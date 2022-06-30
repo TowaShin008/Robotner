@@ -87,18 +87,18 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
-        //レイの当たり判定
-        Ray ray = new Ray(transform.position, transform.forward);
+        ////レイの当たり判定
+        //Ray ray = new Ray(transform.position, transform.forward);
 
-        RaycastHit hit;
+        //RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                rayCollisionFlag = true;
-            }
-        }
+        //if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        //{
+        //    if (hit.collider.gameObject.tag == "Player")
+        //    {
+        //        rayCollisionFlag = true;
+        //    }
+        //}
     }
 
     public void OnDetectObject(Collider collider)
@@ -106,6 +106,15 @@ public class Enemy : MonoBehaviour
         if (collider.CompareTag("Player"))
         {
             sphereCollisionFlag = true;
+        }
+    }
+
+    public void OnFanDetectObject(Collider collider)
+    {
+        if (collider.CompareTag("Player"))
+        {
+            Debug.Log("HIT");
+            rayCollisionFlag = true;
         }
     }
     //発見の演出処理
@@ -131,5 +140,12 @@ public class Enemy : MonoBehaviour
             }
             stopTimer--;
         }
+    }
+
+    //扇形の当たり判定
+    public bool CollisionFan_to_Point(Vector3 otherPosition)
+    {
+
+        return false;
     }
 }
