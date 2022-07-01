@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent navMeshAgent;
 
     //巡回する4箇所のポイント
-    public Vector3[] wayPoints = new Vector3[4];
+    public Transform[] wayPoints = new Transform[4];
     //現在の目的の座標
     private int currentRoot;
     private int mode;
@@ -33,17 +33,16 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Vector3 pos = wayPoints[currentRoot];//Vector3型のposに現在の目的地の座標を代入
+        Transform currentPoint = wayPoints[currentRoot];//Vector3型のposに現在の目的地の座標を代入
         float distance = Vector3.Distance(this.transform.position, playerObject.transform.position);//敵とプレイヤーの距離を求める
 
         if (sphereCollisionFlag == false && rayCollisionFlag == false)
         {
             navMeshAgent.isStopped = false;
-            navMeshAgent.updatePosition = true;
             stopFlag = false;
 
             //プレイヤーがしゃがんでいたら巡回モードに移行
-            if (playerObject.GetComponent<FPSController>().GetSquatFlag()) 
+            if (playerObject.GetComponent<FPSController>().GetSquatFlag())
             {
                 mode = 0;//Modeを0にする
             }
@@ -65,7 +64,7 @@ public class Enemy : MonoBehaviour
 
             case 0://case0の場合
 
-                if (Vector3.Distance(transform.position, pos) < 1f)
+                if (Vector3.Distance(transform.position, currentPoint.position) < 1f)
                 {//もし敵の位置と現在の目的地との距離が1以下なら
                     currentRoot += 1;//currentRootを+1する
                     stopTimer = 60;
@@ -74,7 +73,7 @@ public class Enemy : MonoBehaviour
                         currentRoot = 0;//currentRootを0にする
                     }
                 }
-                GetComponent<NavMeshAgent>().SetDestination(pos);//NavMeshAgentの情報を取得し目的地をposにする
+                GetComponent<NavMeshAgent>().SetDestination(currentPoint.position);//NavMeshAgentの情報を取得し目的地をposにする
 
                 break;//switch文の各パターンの最後につける
 
@@ -127,9 +126,6 @@ public class Enemy : MonoBehaviour
         if (timeOut)
         {
             navMeshAgent.isStopped = false;
-            navMeshAgent.updatePosition = true;
-            Rigidbody rigidbody = GetComponent<Rigidbody>();
-            rigidbody.isKinematic = false;
             stopFlag = true;
         }
         else

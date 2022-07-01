@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class CollisionFanDetector : MonoBehaviour
 {
     [SerializeField] private TriggerEvent onTriggerStay = new TriggerEvent();
-    private float m_fSightAngle = 10.0f;
+    private float m_fSightAngle = 5.0f;
     /// <summary>
     /// Is Trigger‚ªON‚Å‘¼‚ÌCollider‚Æd‚È‚Á‚Ä‚¢‚é‚Æ‚«‚ÉŒÄ‚Î‚ê‘±‚¯‚é
     /// </summary>
