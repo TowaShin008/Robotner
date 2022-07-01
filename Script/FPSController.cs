@@ -66,7 +66,7 @@ public class FPSController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkController = true;
+        //checkController = true;
         float x = Input.GetAxis("lightJoyStickX");
         float y = Input.GetAxis("lightJoyStickY");
         if (checkController)
