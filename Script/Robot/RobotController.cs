@@ -26,6 +26,10 @@ public class RobotController : MonoBehaviour
     [SerializeField] private GameObject RobotScene;
 
     public float knockback;
+
+    private bool move; 
+    public AudioClip clip;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,23 +37,35 @@ public class RobotController : MonoBehaviour
         transmitterCounter = GameObject.Find("TransmitterCounter").GetComponent<TransmitterCounter>();
         textComponent = textObject.GetComponent<Text>();
         textComponent2 = textObject2.GetComponent<Text>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (RobotScene.activeInHierarchy == false) { return; }
+        if (RobotScene.activeInHierarchy == false) 
+        {
+            audioSource.mute = true;
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.B))
         {
             ModeBreakOnOff();
         }
-        if (isBreak != false) { return; }
+        if (isBreak != false)
+        {
+            audioSource.mute = true;
+            return;
+        }
+        move = false;
 
         //自動操縦がオンの時、向いている方向に進み続ける
         if (modeAuto == true)
         {
             MoveForward();
+            move = true;
         }
 
         //自動操縦がオンの時、壁にぶつかったら少しバックする
@@ -91,10 +107,12 @@ public class RobotController : MonoBehaviour
         if (z > 0)
         {
             MoveForward();
+            move = true;
         }
         else if (z < 0)
         {
             MoveBack();
+            move = true;
         }
 
         if (isBack == false && isTurn == false)
@@ -106,10 +124,12 @@ public class RobotController : MonoBehaviour
         if (x < 0)
         {
             RotateLeft();
+            move = true;
         }
         else if (x > 0)
         {
             RotateRight();
+            move = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -134,6 +154,16 @@ public class RobotController : MonoBehaviour
             }
 
         }
+
+        if(move == true)
+        {
+            audioSource.mute = false;
+        }
+        else
+        {
+            audioSource.mute = true;
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)

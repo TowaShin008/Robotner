@@ -28,6 +28,8 @@ public class FPSController : MonoBehaviour
     float minX;
     float maxX;
 
+    public AudioClip rustle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,6 +86,7 @@ public class FPSController : MonoBehaviour
                     minX = normalMinX;
                     maxX = normalMaxX;
                     tabletPowerFlag = false;
+                    GetComponent<AudioSource>().PlayOneShot(rustle);
                 }
             }
         }
@@ -98,6 +101,7 @@ public class FPSController : MonoBehaviour
                     minX = tabletMinX;
                     maxX = tabletMaxX;
                     tabletPowerFlag = true;
+                    GetComponent<AudioSource>().PlayOneShot(rustle);
                 }
             }
         }
