@@ -5,11 +5,7 @@ using UnityEngine;
 public class FPSController : MonoBehaviour
 {
     float x, z;
-    float speed = 0.1f;
-
-    Vector3 characterPos;
-    float playerBasePosY;
-    float playerBaseSquatPosY;
+    float speed = 5.0f;
 
     public GameObject cam;
     Quaternion cameraRot, characterRot;
@@ -36,9 +32,6 @@ public class FPSController : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         cameraRot = cam.transform.localRotation;
-        characterPos = transform.position;
-        playerBasePosY = characterPos.y;
-        playerBaseSquatPosY = playerBasePosY - 1.0f;
         characterRot = transform.localRotation;
         tabletPivotRot = tabletPivot.transform.localRotation;
         tabletPowerFlag = false;
@@ -73,7 +66,7 @@ public class FPSController : MonoBehaviour
         //プレイヤーのしゃがむ入力処理
         if(Input.GetKeyDown(KeyCode.LeftControl))
         {//しゃがんでいるかのフラグ切り替え
-            if(squatFlag==false)
+            if (squatFlag == false)
             {
                 squatFlag = true;
             }
@@ -160,28 +153,27 @@ public class FPSController : MonoBehaviour
     {
         if (tabletPowerFlag) { return; }
 
-        x = 0;
-        z = 0;
-
         //プレイヤー移動処理
-        x = Input.GetAxisRaw("Horizontal") * speed;
-        z = Input.GetAxisRaw("Vertical") * speed;
-
-        characterPos = this.transform.position;
-
-        //プレイヤーが浮かないように一定の高さで固定(Y軸のポジションを固定)
-        if(squatFlag)
-        {//しゃがみ時の基本ポジション
-            characterPos.y = playerBaseSquatPosY;
+        if (Input.GetKey(KeyCode.W))
+        {
+            Vector3 velocity = gameObject.transform.rotation * new Vector3(0, 0, speed);
+            gameObject.transform.position += velocity * Time.deltaTime;
         }
-        else
-        {//通常時の基本ポジション
-            characterPos.y = playerBasePosY;
+        if (Input.GetKey(KeyCode.A))
+        {
+            Vector3 velocity = gameObject.transform.rotation * new Vector3(-speed, 0, 0);
+            gameObject.transform.position += velocity * Time.deltaTime;
         }
-
-        this.transform.position = characterPos;
-
-        transform.position += cam.transform.forward * z + cam.transform.right * x;
+        if (Input.GetKey(KeyCode.S))
+        {
+            Vector3 velocity = gameObject.transform.rotation * new Vector3(0, 0, -speed);
+            gameObject.transform.position += velocity * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            Vector3 velocity = gameObject.transform.rotation * new Vector3(speed, 0, 0);
+            gameObject.transform.position += velocity * Time.deltaTime;
+        }
     }
 
     //角度制限関数の作成

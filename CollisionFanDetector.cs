@@ -13,13 +13,15 @@ public class CollisionFanDetector : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag=="Player")
+        if (other.tag == "Player")
         {
+            //自身とプレイヤーのベクトルを計算
             Vector3 positionDelta = other.transform.position - transform.position;
+            //角度の計算
             float targetAngle = Vector3.Angle(transform.forward, positionDelta);
-            if(targetAngle<m_fSightAngle)
+            if (targetAngle < m_fSightAngle)
             {
-                if (Physics.Raycast(transform.position, new Vector3(positionDelta.x, 0f, positionDelta.z), out RaycastHit hit))
+                if (Physics.Raycast(transform.position, new Vector3(positionDelta.x, 0f, positionDelta.z), out RaycastHit hit));
                 {
                     if (hit.collider == other)
                     {
