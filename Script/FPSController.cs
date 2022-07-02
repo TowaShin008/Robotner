@@ -66,14 +66,20 @@ public class FPSController : MonoBehaviour
         //プレイヤーのしゃがむ入力処理
         if(Input.GetKeyDown(KeyCode.LeftControl))
         {//しゃがんでいるかのフラグ切り替え
+            const float squatPositionY = 0.5f;
+            Vector3 squatPosition = cam.transform.position;
             if (squatFlag == false)
             {
                 squatFlag = true;
+                squatPosition.y -= squatPositionY;
             }
             else
             {
                 squatFlag = false;
+                squatPosition.y += squatPositionY;
             }
+
+            cam.transform.position = squatPosition;
         }
         //タブレットの操作処理
         TabletProcessing();
