@@ -10,6 +10,12 @@ public class DoorOpen : MonoBehaviour
     [SerializeField]float maxHight;
     //開くスピード
     [SerializeField] float speed;
+    //開きフラグ
+    bool openFlag = false;
+    //時間
+    int timer = 0;
+    //閉まるまでの猶予時間
+    int shutTime = 30;
     //現在地の保存
     Vector3 savePosotion;
     PressureSensitivePlate plateScript;
@@ -27,16 +33,12 @@ public class DoorOpen : MonoBehaviour
         //感圧板が踏まれたら
         if (plateScript.GetHitFlag())
         {
-            if (transform.position.y < maxHight)
-            {
-                Vector3 pos = transform.position;
-                pos.y += speed;
-                transform.position = pos;
-            }
+            openFlag = true;
+            timer = 0;
         }
-        else 
+        if (timer == 0 && !openFlag)
         {
-            if (transform.position.y > savePosotion.y)
+            if (transform.position.y >= savePosotion.y)
             {
                 Vector3 pos = transform.position;
                 pos.y -= speed;
@@ -44,5 +46,21 @@ public class DoorOpen : MonoBehaviour
 
             }
         }
+        if (openFlag)
+        {
+            if (transform.position.y <= maxHight)
+            {
+                Vector3 pos = transform.position;
+                pos.y += speed;
+                transform.position = pos;
+            }
+            timer++;
+            if (timer > shutTime) 
+            {
+                timer = 0;
+                openFlag = false;
+            }
+        }
+       
     }
 }
