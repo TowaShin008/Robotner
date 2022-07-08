@@ -190,7 +190,7 @@ public class FPSController : MonoBehaviour
         q.x /= q.w;
         q.y /= q.w;
         q.z /= q.w;
-        q.w = 1f;
+        q.w = 1.0f;
 
         float angleX = Mathf.Atan(q.x) * Mathf.Rad2Deg * 2f;
 
@@ -205,7 +205,6 @@ public class FPSController : MonoBehaviour
     {
         if (collision.gameObject.name == "Enemy")
         {
-            Debug.Log("Hit");
             deadFlag = true;
         }
     }
