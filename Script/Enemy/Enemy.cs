@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 
     private bool stopFlag;
     private bool sphereCollisionFlag;
-    private bool rayCollisionFlag;
+    private bool fanCollisionFlag;
     private int stopTimer = 60;
 
     public AudioClip clip;
@@ -27,30 +27,19 @@ public class Enemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         stopFlag = false;
         sphereCollisionFlag = false;
-        rayCollisionFlag = false;
+        fanCollisionFlag = false;
         stopTimer = 60;
     }
 
     void Update()
     {
-
-        //if (wayPoints.Length == 0)
-        //{
-        //    return;
-        //}
         Transform currentPoint = wayPoints[currentRoot];//Vector3型のposに現在の目的地の座標を代入
 
-        if (sphereCollisionFlag == false && rayCollisionFlag == false)
+        if (sphereCollisionFlag == false && fanCollisionFlag == false)
         {
             navMeshAgent.isStopped = false;
             stopFlag = false;
             mode = 0;
-
-            ////プレイヤーがしゃがんでいたら巡回モードに移行
-            //if (playerObject.GetComponent<FPSController>().GetSquatFlag())
-            //{
-            //    mode = 0;//Modeを0にする
-            //}
         }
         else
         {
@@ -58,7 +47,7 @@ public class Enemy : MonoBehaviour
             if (stopFlag == false)
             {//発見時の停止演出
              //プレイヤーがしゃがんでいたら巡回モードに移行
-                if (playerObject.GetComponent<FPSController>().GetSquatFlag())
+                if (playerObject.GetComponent<FPSController>().GetSquatFlag() && fanCollisionFlag == false)
                 {
                     mode = 0;
                 }
@@ -70,7 +59,7 @@ public class Enemy : MonoBehaviour
         }
 
         sphereCollisionFlag = false;
-        rayCollisionFlag = false;
+        fanCollisionFlag = false;
 
         switch (mode)
         {//Modeの切り替えは
@@ -123,8 +112,7 @@ public class Enemy : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            Debug.Log("HIT");
-            rayCollisionFlag = true;
+            fanCollisionFlag = true;
         }
     }
     //発見の演出処理
@@ -141,7 +129,8 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (stopTimer == 60)
+            bool beginStop = stopTimer == 60;
+            if (beginStop)
             {
                 GetComponent<AudioSource>().PlayOneShot(clip);
             }
