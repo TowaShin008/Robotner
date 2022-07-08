@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AccessCode : MonoBehaviour
 {
+    private int accessCode = -1;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,15 @@ public class AccessCode : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public int GetAccessCode()
+    {
+        return accessCode;
+    }
+
+    public void SetAccessCode(int code)
+    {
+        accessCode = code;
     }
 }

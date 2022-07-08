@@ -6,6 +6,8 @@ public class StoneWallCollider : MonoBehaviour
 {
     public GameObject wallCollider;
     public Transform wallTransform;
+    public float xSize = 2.5f;
+    public float zSize = 2.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -13,7 +15,7 @@ public class StoneWallCollider : MonoBehaviour
         Vector3 pos = wallTransform.position;
         Vector3 scale = wallTransform.localScale;
         Quaternion rot = wallTransform.localRotation;
-        scale.x = 20;
+
         scale.y = 20;
         scale.z = 0.5f;
         for (int i = 0; i < 4; i++)
@@ -21,19 +23,23 @@ public class StoneWallCollider : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    pos.x += 2.5f;
+                    pos.x += xSize;
                     rot = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+                    scale.x = zSize * 2;
                     break;
                 case 1:
-                    pos.x -= 5.0f;
+                    pos.x -= xSize * 2;
+                    scale.x = zSize * 2;
                     break;
                 case 2:
-                    pos.x += 2.5f;
-                    pos.z += 2.5f;
+                    pos.x += xSize;
+                    pos.z += zSize;
                     rot = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                    scale.x = xSize * 2;
                     break;
                 case 3:
-                    pos.z -= 5.0f;
+                    pos.z -= zSize * 2;
+                    scale.x = xSize * 2;
                     break;
                 default:
                     break;

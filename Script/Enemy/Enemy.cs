@@ -18,8 +18,8 @@ public class Enemy : MonoBehaviour
 
     private bool stopFlag;
     private bool sphereCollisionFlag;
-    private bool rayCollisionFlag;
-    private int stopTimer = 60;
+    private bool fanCollisionFlag;
+    private int stopTimer;
 
     public AudioClip clip;
     private void Start()
@@ -27,42 +27,40 @@ public class Enemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         stopFlag = false;
         sphereCollisionFlag = false;
-        rayCollisionFlag = false;
+        fanCollisionFlag = false;
         stopTimer = 60;
     }
 
     void Update()
     {
-
-        //if (wayPoints.Length == 0)
-        //{
-        //    return;
-        //}
         Transform currentPoint = wayPoints[currentRoot];//Vector3型のposに現在の目的地の座標を代入
-        float distance = Vector3.Distance(this.transform.position, playerObject.transform.position);//敵とプレイヤーの距離を求める
 
-        if (sphereCollisionFlag == false && rayCollisionFlag == false)
+        if (sphereCollisionFlag == false && fanCollisionFlag == false)
         {
             navMeshAgent.isStopped = false;
             stopFlag = false;
-
-            //プレイヤーがしゃがんでいたら巡回モードに移行
-            if (playerObject.GetComponent<FPSController>().GetSquatFlag())
-            {
-                mode = 0;//Modeを0にする
-            }
+            mode = 0;
         }
         else
         {
             mode = 1;
             if (stopFlag == false)
-            {//発見時の停止演出
-                StopProcessing();
+            {
+             //プレイヤーがしゃがんでいたら巡回モードに移行
+                if (playerObject.GetComponent<FPSController>().GetSquatFlag() && fanCollisionFlag == false)
+                {
+                    mode = 0;
+                }
+                else
+                {//発見時の停止演出
+                    StopProcessing();
+                }
             }
         }
 
+        //それぞれの当たり判定をリセット
         sphereCollisionFlag = false;
-        rayCollisionFlag = false;
+        fanCollisionFlag = false;
 
         switch (mode)
         {//Modeの切り替えは
@@ -71,18 +69,8 @@ public class Enemy : MonoBehaviour
 
                 if (Vector3.Distance(transform.position, currentPoint.position) < 1f)
                 {//もし敵の位置と現在の目的地との距離が1以下なら
-                    currentRoot += 1;//currentRootを+1する
+                    currentRoot++;//インデックスを次にする
                     stopTimer = 60;
-                    if (currentRoot > wayPoints.Count - 1)
-                    {//もしcurrentRootがwayPointsの要素数-1より大きいなら
-                        currentRoot = 0;//currentRootを0にする
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.Minus))
-                {
-                    currentRoot++;
-
                     if (currentRoot > wayPoints.Count - 1)
                     {//もしcurrentRootがwayPointsの要素数-1より大きいなら
                         currentRoot = 0;//currentRootを0にする
@@ -101,19 +89,6 @@ public class Enemy : MonoBehaviour
                 }
                 break;
         }
-
-        ////レイの当たり判定
-        //Ray ray = new Ray(transform.position, transform.forward);
-
-        //RaycastHit hit;
-
-        //if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        //{
-        //    if (hit.collider.gameObject.tag == "Player")
-        //    {
-        //        rayCollisionFlag = true;
-        //    }
-        //}
     }
 
     public void OnDetectObject(Collider collider)
@@ -128,11 +103,10 @@ public class Enemy : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            Debug.Log("HIT");
-            rayCollisionFlag = true;
+            fanCollisionFlag = true;
         }
     }
-    //発見の演出処理
+    //発見時の停止演出処理
     public void StopProcessing()
     {
         navMeshAgent.isStopped = true;
@@ -146,7 +120,8 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (stopTimer == 60)
+            bool beginStop = stopTimer == 60;
+            if (beginStop)
             {
                 GetComponent<AudioSource>().PlayOneShot(clip);
             }

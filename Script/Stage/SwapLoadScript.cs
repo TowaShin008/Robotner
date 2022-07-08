@@ -16,8 +16,8 @@ public class SwapLoadScript : MonoBehaviour
 
         if (!baseloadA.activeSelf)
         {
-            baseloadA.SetActive(true);
-            baseloadB.SetActive(true);
+            loadA.SetActive(true);
+            loadB.SetActive(true);
         }
         GameObject parent = GameObject.Find("LoadParent");
         GameObject mainLoadA = Instantiate(baseloadA);
@@ -45,8 +45,8 @@ public class SwapLoadScript : MonoBehaviour
             mainLoadB.transform.localScale = loadA.transform.localScale;
         }
 
-        baseloadA.SetActive(false);
-        baseloadB.SetActive(false);
+        loadA.SetActive(false);
+        loadB.SetActive(false);
 
     }
 

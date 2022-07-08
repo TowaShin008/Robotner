@@ -15,7 +15,7 @@ public class RubbleScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        return;
+        //return;
 
         for (int i = 0; i < size; i++)
         {
