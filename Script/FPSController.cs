@@ -50,7 +50,7 @@ public class FPSController : MonoBehaviour
         var controllerNames = Input.GetJoystickNames();
 
         //何も接続されていないならマウスの処理
-        if (controllerNames[0] == "")
+        /*if (controllerNames[0] == "")
         {
             //接続されてないからマウス
             checkController = false;
@@ -59,7 +59,7 @@ public class FPSController : MonoBehaviour
         {
             //接続されてたらコントローラー
             checkController = true;
-        }
+        }*/
 
     }
 
