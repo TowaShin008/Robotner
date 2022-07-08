@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     private bool stopFlag;
     private bool sphereCollisionFlag;
     private bool fanCollisionFlag;
-    private int stopTimer = 60;
+    private int stopTimer;
 
     public AudioClip clip;
     private void Start()
@@ -45,19 +45,20 @@ public class Enemy : MonoBehaviour
         {
             mode = 1;
             if (stopFlag == false)
-            {//発見時の停止演出
+            {
              //プレイヤーがしゃがんでいたら巡回モードに移行
                 if (playerObject.GetComponent<FPSController>().GetSquatFlag() && fanCollisionFlag == false)
                 {
                     mode = 0;
                 }
                 else
-                {
+                {//発見時の停止演出
                     StopProcessing();
                 }
             }
         }
 
+        //それぞれの当たり判定をリセット
         sphereCollisionFlag = false;
         fanCollisionFlag = false;
 
@@ -68,18 +69,8 @@ public class Enemy : MonoBehaviour
 
                 if (Vector3.Distance(transform.position, currentPoint.position) < 1f)
                 {//もし敵の位置と現在の目的地との距離が1以下なら
-                    currentRoot += 1;//currentRootを+1する
+                    currentRoot++;//インデックスを次にする
                     stopTimer = 60;
-                    if (currentRoot > wayPoints.Count - 1)
-                    {//もしcurrentRootがwayPointsの要素数-1より大きいなら
-                        currentRoot = 0;//currentRootを0にする
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.Minus))
-                {
-                    currentRoot++;
-
                     if (currentRoot > wayPoints.Count - 1)
                     {//もしcurrentRootがwayPointsの要素数-1より大きいなら
                         currentRoot = 0;//currentRootを0にする
@@ -115,7 +106,7 @@ public class Enemy : MonoBehaviour
             fanCollisionFlag = true;
         }
     }
-    //発見の演出処理
+    //発見時の停止演出処理
     public void StopProcessing()
     {
         navMeshAgent.isStopped = true;
