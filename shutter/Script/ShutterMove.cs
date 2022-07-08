@@ -4,43 +4,55 @@ using UnityEngine;
 
 public class ShutterMove : MonoBehaviour
 {
-    float up = 0.1f;
-    Vector3 direction = new Vector3(0.5f, 5f, 2f);
-    Vector3 direction2 = new Vector3(0.5f, 0.5f, 2f);
-    float speed = 1.0f;
+    public GameObject Shutternum; //Shutterそのものが入る変数
+    public bool Open = true;
+    //動きの高さ
+    float height = 3.0f;
+    Vector3 finpos;
 
-    // 辞書型の変数を使ってます。
-    Dictionary<string, bool> move = new Dictionary<string, bool>
-    {
-        {"up", false },
-        {"down", false },
-    };
-
-    // Use this for initialization
     void Start()
     {
-
+        if (Open == false)
+        {
+            //デフォルトの色
+            GetComponent<Renderer>().material.color = Color.blue;
+        }
+        else
+        {
+            //デフォルトの色
+            GetComponent<Renderer>().material.color = Color.red;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        move["up"] = Input.GetKey(KeyCode.UpArrow);
-        move["down"] = Input.GetKey(KeyCode.DownArrow);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-    }
-
-    void FixedUpdate()
-    {
-        if (move["up"])
+        if (Open == false && Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, 10.0f)) //アクションボタンを押したとき
         {
-            float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, direction, step);
+            if (hit.collider == this.GetComponent<Collider>())
+            {
+                finpos = Shutternum.transform.position;
+                finpos.y = finpos.y + height;
+
+                Shutternum.transform.position = finpos;
+                GetComponent<Renderer>().material.color = Color.red;
+
+                Open = true;
+            }
         }
-        if (move["down"])
+        else if (Open == true && Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, 10.0f))
         {
-            float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, direction2, step);
+            if (hit.collider == this.GetComponent<Collider>())
+            {
+                finpos = Shutternum.transform.position;
+                finpos.y = finpos.y - height;
+
+                Shutternum.transform.position = finpos;
+                Open = false;
+                GetComponent<Renderer>().material.color = Color.blue;
+            }
         }
     }
 }

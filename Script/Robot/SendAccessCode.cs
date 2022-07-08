@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SendAccessCode : MonoBehaviour
 {
@@ -22,10 +23,13 @@ public class SendAccessCode : MonoBehaviour
 
     RaycastHit hit;
 
+    public Slider gauge;
+
     // Start is called before the first frame update
     void Start()
     {
         sent = false;
+        gauge.maxValue = needTime;
     }
 
     // Update is called once per frame
@@ -62,8 +66,22 @@ public class SendAccessCode : MonoBehaviour
                 SendCode();
             }
         }
+        else
+        {
+            start = Time.time;
+            elapsedTime = Time.time - start;
+        }
 
         Debug.Log(elapsedTime);
+
+        if (sent == false)
+        {
+            gauge.value = elapsedTime;
+        }
+        else
+        {
+            gauge.value = gauge.maxValue;
+        }
     }
 
     private void OnDrawGizmos()
@@ -78,4 +96,5 @@ public class SendAccessCode : MonoBehaviour
         clone.transform.parent = robot.transform;
         accessCode.transform.parent = robPad.transform;
     }
+
 }
