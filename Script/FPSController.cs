@@ -17,7 +17,7 @@ public class FPSController : MonoBehaviour
     bool tabletPowerFlag;
 
     //XY方向の視点感度
-     public float Xsensityvity, Ysensityvity;
+    public float Xsensityvity, Ysensityvity;
 
     bool deadFlag;
 
@@ -64,7 +64,7 @@ public class FPSController : MonoBehaviour
         }
 
         //プレイヤーのしゃがむ入力処理
-        if(Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {//しゃがんでいるかのフラグ切り替え
             const float squatPositionY = 0.5f;
             Vector3 squatPosition = cam.transform.position;
