@@ -8,7 +8,7 @@ public class RobotController : MonoBehaviour
 {
     private Rigidbody rigidbody;
     float x, z;
-    private float speed = 0.05f;
+    [SerializeField]private float speed = 0.05f;
     private bool modeAuto = false;
     private bool modeTurn = false;
     private bool right = true;

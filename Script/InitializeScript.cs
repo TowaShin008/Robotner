@@ -20,7 +20,7 @@ public class InitializeScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-//            gameObject1.SetActive(false);
+            gameObject1.SetActive(false);
             gameObject2.SetActive(false);
         }
     }

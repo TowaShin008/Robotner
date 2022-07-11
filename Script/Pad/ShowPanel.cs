@@ -33,11 +33,11 @@ public class ShowPanel : MonoBehaviour
     {
         if (!padFlag)
         {
-            if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown("joystick button 0"))
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
                 pad.SetActive(!pad.activeSelf);
                 padFlag = !padFlag;
-                count = activeTimer + 100;
+                count =  - 100;
             }
         }
         else
@@ -50,14 +50,14 @@ public class ShowPanel : MonoBehaviour
             else if (count == activeTimer)
             {
                 count++;
-                pad.SetActive(!pad.activeSelf);
-                padFlag = !padFlag;
-
             }
-
-            if (Input.GetKeyDown(KeyCode.Tab)||Input.GetKeyDown("joystick button 0"))
+            if (count > activeTimer)
             {
-                count = 0;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    pad.SetActive(!pad.activeSelf);
+                    padFlag = !padFlag;
+                }
             }
         }
     }
