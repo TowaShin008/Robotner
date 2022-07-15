@@ -8,9 +8,11 @@ public class RobotController : MonoBehaviour
 {
     private Rigidbody rigidbody;
     float x, z;
-    private float speed = 0.05f;
+    private float speed = 0.1f;
     private bool modeAuto = false;
     private bool modeTurn = false;
+    private bool modeTracking = false;
+
     private bool right = true;
     private bool isBack = false;
     private bool isTurn = false;
@@ -24,6 +26,7 @@ public class RobotController : MonoBehaviour
     private Text textComponent;
     private Text textComponent2;
     [SerializeField] private GameObject RobotScene;
+    [SerializeField] private GameObject player;
 
     public float knockback;
 
@@ -45,11 +48,23 @@ public class RobotController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(modeTracking == true && Vector3.Distance(transform.position, player.transform.position) !> 5.0f && RobotScene.activeInHierarchy == false)
+        {
+            Vector3 direction = player.transform.position - transform.position;
+            direction.y = 0;
+            Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 0.1f);
+            MoveForward();
+            transform.position += vec;
+        }
+
         if (RobotScene.activeInHierarchy == false) 
         {
             audioSource.mute = true;
             return;
         }
+
+        //仮の壊れた時にロボットを直すボタン処理
         if (Input.GetKeyDown(KeyCode.B))
         {
             ModeBreakOnOff();
@@ -134,7 +149,26 @@ public class RobotController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ModeAutoOnOff();
+            if (modeAuto == true && modeTracking == false)
+            {
+                ModeAutoOnOff();
+                ModeTrackingOnOff();
+            }
+            else if(modeAuto == false && modeTracking == false)
+            {
+                ModeAutoOnOff();
+            }
+            else if(modeAuto == false && modeTracking == true)
+            {
+                ModeTrackingOnOff();
+            }
+            else
+            {
+                //もし何かの不具合でどちらもtrueなら
+                ModeAutoOnOff();
+                ModeTrackingOnOff();
+            }
+
         }
 
         if (Input.GetKeyDown(KeyCode.X))
@@ -242,6 +276,20 @@ public class RobotController : MonoBehaviour
         {
             modeTurn = true;
             textComponent2.text = "回転:ON";
+        }
+    }
+
+    public void ModeTrackingOnOff()
+    {
+        if (modeTracking == false)
+        {
+            modeTracking = true;
+            textComponent.text = "追従:ON";
+        }
+        else
+        {
+            modeTracking = false;
+            textComponent.text = "追従:OFF";
         }
     }
 
