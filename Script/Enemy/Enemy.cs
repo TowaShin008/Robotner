@@ -135,4 +135,8 @@ public class Enemy : MonoBehaviour
 
         return false;
     }
+    public bool Getdeath() 
+    {
+        return fanCollisionFlag;
+    }
 }

@@ -30,6 +30,9 @@ public class FPSController : MonoBehaviour
     public AudioClip clip;
     bool wark = false;
     int warktime = 0;
+    Vector3 savecam;
+    float deathrotation = 0;
+    [SerializeField] int rotspeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,43 +52,65 @@ public class FPSController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
-
-        cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-
-        //Updateの中で作成した関数を呼ぶ
-        cameraRot = ClampRotation(cameraRot);
-
-        cam.transform.localRotation = cameraRot;
-
-        //タブレット起動時のみ視点の横移動を制限
-        if (tabletPowerFlag == false)
+        if (!deadFlag)
         {
-            float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
-            characterRot *= Quaternion.Euler(0, xRot, 0);
-            transform.localRotation = characterRot;
-        }
+            float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
 
-        //プレイヤーのしゃがむ入力処理
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {//しゃがんでいるかのフラグ切り替え
-            const float squatPositionY = 0.5f;
-            Vector3 squatPosition = cam.transform.position;
-            if (squatFlag == false)
+            cameraRot *= Quaternion.Euler(-yRot, 0, 0);
+
+            //Updateの中で作成した関数を呼ぶ
+            cameraRot = ClampRotation(cameraRot);
+
+            cam.transform.localRotation = cameraRot;
+
+            //タブレット起動時のみ視点の横移動を制限
+            if (tabletPowerFlag == false)
             {
-                squatFlag = true;
-                squatPosition.y -= squatPositionY;
+                float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
+                characterRot *= Quaternion.Euler(0, xRot, 0);
+                transform.localRotation = characterRot;
+            }
+
+            //プレイヤーのしゃがむ入力処理
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {//しゃがんでいるかのフラグ切り替え
+                const float squatPositionY = 0.5f;
+                Vector3 squatPosition = cam.transform.position;
+                if (squatFlag == false)
+                {
+                    squatFlag = true;
+                    squatPosition.y -= squatPositionY;
+                }
+                else
+                {
+                    squatFlag = false;
+                    squatPosition.y += squatPositionY;
+                }
+
+                cam.transform.position = squatPosition;
+            }
+            //タブレットの操作処理
+            TabletProcessing();
+            savecam = cam.transform.position;
+
+        }
+        else
+        {
+            Quaternion rot = transform.localRotation ;
+            rot = Quaternion.Euler(deathrotation,0,0);
+            transform.localRotation = rot;
+            if (deathrotation < 90)
+            {
+                deathrotation += rotspeed;
             }
             else
             {
-                squatFlag = false;
-                squatPosition.y += squatPositionY;
+                Vector3 campos = cam.transform.position;
+                campos.y = savecam.y + 5;
+                cam.transform.position = campos;
+                deathrotation = 90;
             }
-
-            cam.transform.position = squatPosition;
         }
-        //タブレットの操作処理
-        TabletProcessing();
     }
 
     //タブレットの操作処理
@@ -206,10 +231,13 @@ public class FPSController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Enemy")
+        for (int i = 1; i < 5; i++)
         {
-            Debug.Log("Hit");
-            deadFlag = true;
+            if (collision.gameObject.name == "enemy"+i)
+            {
+                Debug.Log("Hit");
+                deadFlag = true;
+            }
         }
     }
 
@@ -221,5 +249,9 @@ public class FPSController : MonoBehaviour
     public void SetSquatFlag(bool arg_squatFlag)
     {
         squatFlag = arg_squatFlag;
+    }
+    public bool GetDeadFlag()
+    {
+        return deadFlag;
     }
 }
