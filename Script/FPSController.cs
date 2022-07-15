@@ -26,7 +26,10 @@ public class FPSController : MonoBehaviour
     float maxX;
 
     bool squatFlag;
-
+    //音
+    public AudioClip clip;
+    bool wark = false;
+    int warktime = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -158,7 +161,6 @@ public class FPSController : MonoBehaviour
     private void FixedUpdate()
     {
         if (tabletPowerFlag) { return; }
-
         //プレイヤー移動処理
         if (Input.GetKey(KeyCode.W))
         {
@@ -180,6 +182,7 @@ public class FPSController : MonoBehaviour
             Vector3 velocity = gameObject.transform.rotation * new Vector3(speed, 0, 0);
             gameObject.transform.position += velocity * Time.deltaTime;
         }
+      
     }
 
     //角度制限関数の作成
