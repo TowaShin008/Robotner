@@ -8,7 +8,7 @@ public class RobotController : MonoBehaviour
 {
     private Rigidbody rigidbody;
     float x, z;
-    private float speed = 0.1f;
+    private float speed = 0.2f;
     private bool modeAuto = false;
     private bool modeTurn = false;
     private bool modeTracking = false;
@@ -132,7 +132,8 @@ public class RobotController : MonoBehaviour
 
         if (isBack == false && isTurn == false)
         {
-            transform.position += vec;
+            rigidbody.MovePosition(transform.position + vec);
+            //transform.position += vec;
         }
 
         //ƒƒ{ƒbƒg‚ÌŒü‚«‚Ì‘€ì
@@ -230,8 +231,10 @@ public class RobotController : MonoBehaviour
                 textComponent2.text = "‰ñ“]:OFF";
             }
         }
+        
         vec = Vector3.zero;
     }
+
 
     public void MoveForward()
     {

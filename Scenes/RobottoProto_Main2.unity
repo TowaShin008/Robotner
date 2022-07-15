@@ -36347,12 +36347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c869a987b6afb874fb0dff2946ace38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  robotLight: {fileID: 2054430285}
-  range: 5
-  spotAngle: 80
-  intensity: 15
-  robot: {fileID: 1180174363}
-  RobotScene: {fileID: 1657060906}
 --- !u!114 &1180174365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36365,10 +36359,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b1e34642845d3443945b0149d0f7401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBreak: 0
   textObject: {fileID: 541100051}
   textObject2: {fileID: 18850996}
   RobotScene: {fileID: 1657060906}
+  player: {fileID: 1737415529}
   knockback: 0.5
+  clip: {fileID: 0}
 --- !u!54 &1180174366
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -39764,9 +39761,9 @@ GameObject:
   - component: {fileID: 1347368504}
   - component: {fileID: 1347368503}
   - component: {fileID: 1347368507}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: Goal
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40631,7 +40628,7 @@ GameObject:
   - component: {fileID: 1374277823}
   m_Layer: 6
   m_Name: ClearObject
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52243,10 +52240,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b1e34642845d3443945b0149d0f7401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBreak: 0
   textObject: {fileID: 541100051}
   textObject2: {fileID: 18850996}
   RobotScene: {fileID: 1657060906}
+  player: {fileID: 0}
   knockback: 0
+  clip: {fileID: 0}
 --- !u!114 &1723781383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52259,12 +52259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c869a987b6afb874fb0dff2946ace38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  robotLight: {fileID: 2054430285}
-  range: 5
-  spotAngle: 80
-  intensity: 15
-  robot: {fileID: 1723781375}
-  RobotScene: {fileID: 1723781375}
 --- !u!1 &1724467689
 GameObject:
   m_ObjectHideFlags: 0
