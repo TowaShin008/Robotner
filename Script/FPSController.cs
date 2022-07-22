@@ -102,6 +102,7 @@ public class FPSController : MonoBehaviour
                     minX = normalMinAngleX;
                     maxX = normalMaxAngleX;
                     tabletPowerFlag = false;
+                    GetComponent<AudioSource>().PlayOneShot(clip);
                 }
             }
         }
@@ -116,6 +117,7 @@ public class FPSController : MonoBehaviour
                     minX = tabletMinAngleX;
                     maxX = tabletMaxAngleX;
                     tabletPowerFlag = true;
+                    GetComponent<AudioSource>().PlayOneShot(clip);
                 }
             }
         }
