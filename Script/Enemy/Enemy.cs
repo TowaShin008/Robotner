@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     private bool fanCollisionFlag;
     private int stopTimer;
 
-    public AudioClip clip;
+    public AudioClip bark;
     public AudioClip howling;
 
     int patrolTime;
@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
         sphereCollisionFlag = false;
         fanCollisionFlag = false;
         stopTimer = 60;
-        patrolTime = 0;
+        patrolTime = 120;
     }
 
     void Update()
@@ -47,7 +47,10 @@ public class Enemy : MonoBehaviour
         {
             navMeshAgent.isStopped = false;
             stopFlag = false;
-            if(patrolTime < 120)
+
+            //プレイヤーに完全に気づいていないか(パトロール状態が長く続いているか)どうかのフラグ
+            bool noticeFlag = patrolTime < 120;
+            if(noticeFlag)
             {
                 patrolTime++;
             }
@@ -58,14 +61,15 @@ public class Enemy : MonoBehaviour
             mode = 1;
             if (stopFlag == false)
             {
-             //プレイヤーがしゃがんでいたら巡回モードに移行
-                if (playerObject.GetComponent<FPSController>().GetSquatFlag() && fanCollisionFlag == false && patrolTime ==120)
+                //プレイヤーがしゃがんでいたら巡回モードに移行
+                if (playerObject.GetComponent<FPSController>().GetSquatFlag() && fanCollisionFlag == false && patrolTime == 120)
                 {
                     mode = 0;
                 }
                 else
-                {//発見時の停止演出
+                {//パトロール時間の初期化
                     patrolTime = 0;
+                    //発見時の停止演出処理
                     StopProcessing();
                 }
             }
@@ -76,25 +80,24 @@ public class Enemy : MonoBehaviour
         fanCollisionFlag = false;
 
         switch (mode)
-        {//Modeの切り替えは
+        {
+            case 0:
 
-            case 0://case0の場合
-
-                if (Vector3.Distance(transform.position, currentPoint.position) < 1f)
-                {//もし敵の位置と現在の目的地との距離が1以下なら
-                    currentRoot++;//インデックスを次にする
+                if (Vector3.Distance(transform.position, currentPoint.position) < 1.0f)
+                {//もし敵の位置と現在の目的地との距離が1以下ならインデックスを次にする
+                    currentRoot++;
                     stopTimer = 60;
                     if (currentRoot > wayPoints.Count - 1)
-                    {//もしcurrentRootがwayPointsの要素数-1より大きいなら
-                        currentRoot = 0;//currentRootを0にする
+                    {//もしcurrentRootがwayPointsの要素数-1より大きいならcurrentRootを0にする
+                        currentRoot = 0;
                     }
                 }
 
                 GetComponent<NavMeshAgent>().SetDestination(currentPoint.position);//NavMeshAgentの情報を取得し目的地をposにする
 
-                break;//switch文の各パターンの最後につける
+                break;
 
-            case 1://case1の場合
+            case 1:
                 //停止演出が終わったら追跡の開始
                 if (stopFlag)
                 {
@@ -140,7 +143,8 @@ public class Enemy : MonoBehaviour
 
         if (stopTimer == 1)
         {
-            GetComponent<AudioSource>().PlayOneShot(howling);
+            const float howlingVolume = 5.0f;
+            GetComponent<AudioSource>().PlayOneShot(howling, howlingVolume);
         }
 
         if (timeOut)
@@ -153,7 +157,7 @@ public class Enemy : MonoBehaviour
             bool beginStop = stopTimer == 60;
             if (beginStop)
             {
-                GetComponent<AudioSource>().PlayOneShot(clip);
+                GetComponent<AudioSource>().PlayOneShot(bark);
             }
             stopTimer--;
         }

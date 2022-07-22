@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FPSController : MonoBehaviour
 {
-    float x, z;
     float speed = 5.0f;
 
     public GameObject cam;
@@ -27,9 +26,7 @@ public class FPSController : MonoBehaviour
 
     bool squatFlag;
     //âπ
-    public AudioClip clip;
-    bool wark = false;
-    int warktime = 0;
+    public AudioClip footStep;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,9 +38,9 @@ public class FPSController : MonoBehaviour
         deadFlag = false;
         squatFlag = false;
         const float normalMaxX = 90f;
+        maxX = normalMaxX;
         const float normalMinX = -90f;
         minX = normalMinX;
-        maxX = normalMaxX;
     }
 
     // Update is called once per frame
@@ -72,13 +69,13 @@ public class FPSController : MonoBehaviour
             const float squatPositionY = 0.5f;
             Vector3 squatPosition = cam.transform.position;
             if (squatFlag == false)
-            {
+            {//ÇµÇ·Ç™Ç›éûÇÃë¨ìxÇë„ì¸
                 speed = 1.0f;
                 squatFlag = true;
                 squatPosition.y -= squatPositionY;
             }
             else
-            {
+            {//óßÇøèÛë‘Ç≈ÇÃë¨ìxÇë„ì¸
                 speed = 5.0f;
                 squatFlag = false;
                 squatPosition.y += squatPositionY;
@@ -134,7 +131,8 @@ public class FPSController : MonoBehaviour
         }
         else
         {
-            Quaternion rot = Quaternion.AngleAxis(-5, Vector3.right);
+            const float angleIncremantsize = -5.0f;
+            Quaternion rot = Quaternion.AngleAxis(angleIncremantsize, Vector3.right);
             tabletPivotRot *= rot;
             tabletPivot.transform.localRotation = tabletPivotRot;
         }
@@ -153,7 +151,8 @@ public class FPSController : MonoBehaviour
         }
         else
         {
-            Quaternion rot = Quaternion.AngleAxis(5, Vector3.right);
+            const float angleIncrementSize = 5.0f;
+            Quaternion rot = Quaternion.AngleAxis(angleIncrementSize, Vector3.right);
             tabletPivotRot *= rot;
             tabletPivot.transform.localRotation = tabletPivotRot;
         }
@@ -195,9 +194,9 @@ public class FPSController : MonoBehaviour
         q.x /= q.w;
         q.y /= q.w;
         q.z /= q.w;
-        q.w = 1f;
+        q.w = 1.0f;
 
-        float angleX = Mathf.Atan(q.x) * Mathf.Rad2Deg * 2f;
+        float angleX = Mathf.Atan(q.x) * Mathf.Rad2Deg * 2.0f;
 
         angleX = Mathf.Clamp(angleX, minX, maxX);
 

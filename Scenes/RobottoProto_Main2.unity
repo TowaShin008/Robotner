@@ -5757,7 +5757,7 @@ MonoBehaviour:
   - {fileID: 1248901490}
   playerObject: {fileID: 1737415529}
   robotPosition: {fileID: 460406944}
-  clip: {fileID: 8300000, guid: 727a0ba301c435544aca5a4a4a542ff4, type: 3}
+  bark: {fileID: 8300000, guid: 727a0ba301c435544aca5a4a4a542ff4, type: 3}
   howling: {fileID: 8300000, guid: 05e3811b92c7bb74689a770343221322, type: 3}
 --- !u!195 &144381178
 NavMeshAgent:
@@ -16866,7 +16866,7 @@ MonoBehaviour:
   - {fileID: 257315601}
   playerObject: {fileID: 1737415529}
   robotPosition: {fileID: 460406944}
-  clip: {fileID: 8300000, guid: 727a0ba301c435544aca5a4a4a542ff4, type: 3}
+  bark: {fileID: 8300000, guid: 727a0ba301c435544aca5a4a4a542ff4, type: 3}
   howling: {fileID: 8300000, guid: 05e3811b92c7bb74689a770343221322, type: 3}
 --- !u!195 &457431632
 NavMeshAgent:
@@ -17665,7 +17665,7 @@ MonoBehaviour:
   - {fileID: 31922090}
   playerObject: {fileID: 1737415529}
   robotPosition: {fileID: 1180174367}
-  clip: {fileID: 8300000, guid: 727a0ba301c435544aca5a4a4a542ff4, type: 3}
+  bark: {fileID: 8300000, guid: 727a0ba301c435544aca5a4a4a542ff4, type: 3}
   howling: {fileID: 8300000, guid: 05e3811b92c7bb74689a770343221322, type: 3}
 --- !u!195 &488236577
 NavMeshAgent:
@@ -39091,7 +39091,7 @@ MonoBehaviour:
   - {fileID: 1297520167}
   playerObject: {fileID: 1737415529}
   robotPosition: {fileID: 460406944}
-  clip: {fileID: 8300000, guid: 727a0ba301c435544aca5a4a4a542ff4, type: 3}
+  bark: {fileID: 8300000, guid: 727a0ba301c435544aca5a4a4a542ff4, type: 3}
   howling: {fileID: 8300000, guid: 05e3811b92c7bb74689a770343221322, type: 3}
 --- !u!195 &1171130111
 NavMeshAgent:
@@ -58169,7 +58169,7 @@ MonoBehaviour:
   tabletPivot: {fileID: 1597065816}
   Xsensityvity: 1
   Ysensityvity: 1
-  clip: {fileID: 8300000, guid: edcb4ca8c3033004a8dbff6716845343, type: 3}
+  footStep: {fileID: 8300000, guid: edcb4ca8c3033004a8dbff6716845343, type: 3}
 --- !u!136 &1737415531
 CapsuleCollider:
   m_ObjectHideFlags: 0
