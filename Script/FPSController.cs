@@ -18,8 +18,19 @@ public class FPSController : MonoBehaviour
 
     //XY方向の視点感度
     public float Xsensityvity, Ysensityvity;
-
+    //死亡フラグ
     bool deadFlag;
+    //ゲーム開始フラグ
+    bool gameStartFrag;
+    float wakeUpRotation=90;
+    public float wakeUpSpeed;
+    int wakeUpCase = 0;
+    public float trunSpeed;
+    Vector3 savePos;
+    Vector3 axis;
+    float angle;
+    int count;
+    public GameObject panelScript;
 
     //変数の宣言(角度の制限用)
     float minX;
@@ -47,69 +58,142 @@ public class FPSController : MonoBehaviour
         const float normalMinX = -90f;
         minX = normalMinX;
         maxX = normalMaxX;
+        gameStartFrag = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!deadFlag)
+        if (gameStartFrag)
         {
-            float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
-
-            cameraRot *= Quaternion.Euler(-yRot, 0, 0);
-
-            //Updateの中で作成した関数を呼ぶ
-            cameraRot = ClampRotation(cameraRot);
-
-            cam.transform.localRotation = cameraRot;
-
-            //タブレット起動時のみ視点の横移動を制限
-            if (tabletPowerFlag == false)
+            if (!deadFlag)
             {
-                float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
-                characterRot *= Quaternion.Euler(0, xRot, 0);
-                transform.localRotation = characterRot;
-            }
+                float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
 
-            //プレイヤーのしゃがむ入力処理
-            if (Input.GetKeyDown(KeyCode.LeftControl))
-            {//しゃがんでいるかのフラグ切り替え
-                const float squatPositionY = 0.5f;
-                Vector3 squatPosition = cam.transform.position;
-                if (squatFlag == false)
+                cameraRot *= Quaternion.Euler(-yRot, 0, 0);
+
+                //Updateの中で作成した関数を呼ぶ
+                cameraRot = ClampRotation(cameraRot);
+
+                cam.transform.localRotation = cameraRot;
+
+                //タブレット起動時のみ視点の横移動を制限
+                if (tabletPowerFlag == false)
                 {
-                    squatFlag = true;
-                    squatPosition.y -= squatPositionY;
-                }
-                else
-                {
-                    squatFlag = false;
-                    squatPosition.y += squatPositionY;
+                    float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
+                    characterRot *= Quaternion.Euler(0, xRot, 0);
+                    transform.localRotation = characterRot;
                 }
 
-                cam.transform.position = squatPosition;
-            }
-            //タブレットの操作処理
-            TabletProcessing();
-            savecam = cam.transform.position;
+                //プレイヤーのしゃがむ入力処理
+                if (Input.GetKeyDown(KeyCode.LeftControl))
+                {//しゃがんでいるかのフラグ切り替え
+                    const float squatPositionY = 0.5f;
+                    Vector3 squatPosition = cam.transform.position;
+                    if (squatFlag == false)
+                    {
+                        squatFlag = true;
+                        squatPosition.y -= squatPositionY;
+                    }
+                    else
+                    {
+                        squatFlag = false;
+                        squatPosition.y += squatPositionY;
+                    }
 
-        }
-        else
-        {
-            Quaternion rot = transform.localRotation ;
-            rot = Quaternion.Euler(deathrotation,0,0);
-            transform.localRotation = rot;
-            if (deathrotation < 90)
-            {
-                deathrotation += rotspeed;
+                    cam.transform.position = squatPosition;
+                }
+                //タブレットの操作処理
+                TabletProcessing();
+                savecam = cam.transform.position;
+
             }
             else
             {
-                Vector3 campos = cam.transform.position;
-                campos.y = savecam.y + 5;
-                cam.transform.position = campos;
-                deathrotation = 90;
+                Quaternion rot = transform.localRotation;
+                rot = Quaternion.Euler(deathrotation, 0, 0);
+                transform.localRotation = rot;
+                if (deathrotation < 90)
+                {
+                    deathrotation += rotspeed;
+                }
+                else
+                {
+                    Vector3 campos = cam.transform.position;
+                    campos.y = savecam.y + 5;
+                    cam.transform.position = campos;
+                    deathrotation = 90;
+                }
             }
+        }
+        else
+        {
+            //ここでゲーム開始の導入追加
+            //横たわらせる 
+            Quaternion rot = transform.localRotation;
+            Vector3 pos = gameObject.transform.position;
+
+            switch (wakeUpCase)
+            {
+                case 0:
+                    float sin = Mathf.Sin(Time.time);
+
+                    //視界ぱちぱち
+                    //左右振り向き
+                   
+
+                   
+                    axis = new Vector3(0, 0, 1);
+
+                    angle = sin * trunSpeed;
+                    Quaternion q1 = Quaternion.AngleAxis(180 - angle, axis);
+                    axis = new Vector3(1, 0, 0);
+                    Quaternion q2 = Quaternion.AngleAxis(-90, axis);
+                    rot = q1 * q2;
+                    savePos = gameObject.transform.position;
+
+                    if (0<sin&&sin<0.05)
+                    {
+                        count++;
+                    }
+                    if (count > 5)
+                    {
+                        wakeUpCase = 1;
+                    }
+
+                    break;
+                case 1:
+                    //垂直起き上がり膝まで
+                    if (savePos.y+3.0>pos.y)
+                    {
+                        pos.y += 0.1f;
+                    }
+                    else
+                    {
+                        wakeUpCase = 2;
+                    }
+                    gameObject.transform.position = pos;
+
+                    break;
+                case 2:
+                    //起き上がり頭まで、頭(カメラ)回転
+                    if (wakeUpRotation >= 0)
+                    {
+                        wakeUpRotation -= wakeUpSpeed;
+                    }
+                    else
+                    {
+                        wakeUpRotation = 0;
+                        gameStartFrag = true;
+                        tabletPowerFlag = true;
+                        panelScript.GetComponent<ShowPanel>().ShowPad();
+                    }
+                    rot = Quaternion.Euler(wakeUpRotation, 180, 0);
+                    break;
+            }
+            //rot = Quaternion.Euler(wakeUpRotation, trunangle, 0);
+            transform.localRotation = rot;
+
         }
     }
 

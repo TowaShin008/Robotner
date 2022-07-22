@@ -67,4 +67,11 @@ public class ShowPanel : MonoBehaviour
         camrot = default;
         cam.transform.rotation = camrot;
     }
+
+    public void ShowPad()
+    {
+
+        pad.SetActive(!pad.activeSelf);
+        padFlag = !padFlag;
+    }
 }
