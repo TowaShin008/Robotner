@@ -1,31 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SendAccessCode : MonoBehaviour
 {
     //パッド、ロボット、アクセスコードの順でオブジェクトを入れる
     public GameObject robPad;
     public GameObject robot;
-    public GameObject accessCode;
+    public GameObject accessCodeOBJ;
     GameObject clone;
 
     [SerializeField] private float needTime = 20.0f;
 
     //sendの過去形アクセスコードを送り済みか
     bool sent = false;
-    
+
     //計測の開始時間を格納する変数
     private float start;
     //経過時間を格納する変数
-    private float elapsedTime; 
+    private float elapsedTime;
 
     RaycastHit hit;
+
+    public Slider gauge;
 
     // Start is called before the first frame update
     void Start()
     {
         sent = false;
+        gauge.maxValue = needTime;
     }
 
     // Update is called once per frame
@@ -37,7 +41,7 @@ public class SendAccessCode : MonoBehaviour
         Ray robotRay = new Ray(robot.transform.position, robot.transform.forward);
 
         Debug.DrawRay(robotRay.origin, robotRay.direction * 10, Color.red, 5);
-               
+
         //　Cubeのレイを飛ばしターゲットと接触しているか判定
         if (Physics.BoxCast(robot.transform.position, Vector3.one * 1.0f, robot.transform.forward, out hit, Quaternion.identity, 5.0f))
         {
@@ -62,8 +66,22 @@ public class SendAccessCode : MonoBehaviour
                 SendCode();
             }
         }
+        else
+        {
+            start = Time.time;
+            elapsedTime = Time.time - start;
+        }
 
         Debug.Log(elapsedTime);
+
+        if (sent == false)
+        {
+            gauge.value = elapsedTime;
+        }
+        else
+        {
+            gauge.value = gauge.maxValue;
+        }
     }
 
     private void OnDrawGizmos()
@@ -74,8 +92,10 @@ public class SendAccessCode : MonoBehaviour
 
     public void SendCode()
     {
-        clone = Instantiate(accessCode, accessCode.transform);
-        clone.transform.parent = robot.transform;
-        accessCode.transform.parent = robPad.transform;
+        int accessCode = accessCodeOBJ.GetComponent<CreateAccessCode>().accessCodeNumber;
+
+        GameObject obj = GameObject.Find("AccessCode");
+        obj.GetComponent<AccessCode>().SetAccessCode(accessCode);
     }
+
 }

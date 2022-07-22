@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GoalScript : MonoBehaviour
 {
-    private GameObject acccessCode;
+    private int accessCode;
     private bool openFlag;
     private Vector3 pos;
     public float velocity;
+    public bool isX = false;
+
+    public Text accessCodeText;
     // Start is called before the first frame update
     void Start()
     {
-        acccessCode = GameObject.Find("AccessCode");
+        accessCode = GameObject.Find("CreateAccessCode").GetComponent<CreateAccessCode>().accessCodeNumber;
     }
 
     // Update is called once per frame
@@ -20,19 +24,29 @@ public class GoalScript : MonoBehaviour
         if (!openFlag) return;
 
         Vector3 scale = gameObject.transform.localScale;
+        Vector3 pos = gameObject.transform.position;
 
-        if (scale.z <= 0) return;
+        if (scale.x < 0|| scale.z < 0) return;
 
-        scale.z -= 0.1f;
+        scale.x -= 0.1f;
+        if (!isX) pos.z -= 0.05f;
+        else pos.x -= 0.05f;
+
         gameObject.transform.localScale = scale;
-
-        pos = gameObject.transform.position;
-        pos.x += velocity;
         gameObject.transform.position = pos;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        openFlag = true;
+
+        accessCode = GameObject.Find("CreateAccessCode").GetComponent<CreateAccessCode>().accessCodeNumber;
+        if (accessCode ==
+            GameObject.Find("AccessCode").GetComponent<AccessCode>().GetAccessCode())
+        {
+            openFlag = true;
+            return;
+        }
+
+        accessCodeText.text = "No AccessCode";
     }
 }

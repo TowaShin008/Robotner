@@ -13,10 +13,6 @@ public class ShowAccessCode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CreateAccessCode accessCode;
-        GameObject obj = GameObject.Find("AccessCode");
-        accessCode = obj.GetComponent<CreateAccessCode>();
-        code = accessCode.accessCodeNumber;
     }
 
     // Update is called once per frame
@@ -28,6 +24,11 @@ public class ShowAccessCode : MonoBehaviour
 
     void ShowCode()
     {
+        AccessCode accessCode;
+        GameObject obj = GameObject.Find("AccessCode");
+        accessCode = obj.GetComponent<AccessCode>();
+        code = accessCode.GetAccessCode();
+
         //コードの有無を確認して表示
         if (code == -1) NoCode();
         else CodeIs();  

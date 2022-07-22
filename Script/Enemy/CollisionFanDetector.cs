@@ -13,7 +13,7 @@ public class CollisionFanDetector : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Robot"))
         {
             Vector3 positionDelta = other.transform.position - transform.position;
             float targetAngle = Vector3.Angle(transform.forward, positionDelta);

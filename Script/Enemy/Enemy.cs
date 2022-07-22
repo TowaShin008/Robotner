@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
     private int mode;
     //プレイヤーのポジション
     public GameObject playerObject;
+    public Transform robotPosition;
+
+    private Transform targetPosition;
 
     private bool stopFlag;
     private bool sphereCollisionFlag;
@@ -22,6 +25,9 @@ public class Enemy : MonoBehaviour
     private int stopTimer;
 
     public AudioClip clip;
+    public AudioClip howling;
+
+    int patrolTime;
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -29,16 +35,22 @@ public class Enemy : MonoBehaviour
         sphereCollisionFlag = false;
         fanCollisionFlag = false;
         stopTimer = 60;
+        patrolTime = 0;
     }
 
     void Update()
     {
-        Transform currentPoint = wayPoints[currentRoot];//Vector3型のposに現在の目的地の座標を代入
+        //Vector3型のposに現在の目的地の座標を代入
+        Transform currentPoint = wayPoints[currentRoot];
 
         if (sphereCollisionFlag == false && fanCollisionFlag == false)
         {
             navMeshAgent.isStopped = false;
             stopFlag = false;
+            if(patrolTime < 120)
+            {
+                patrolTime++;
+            }
             mode = 0;
         }
         else
@@ -47,12 +59,13 @@ public class Enemy : MonoBehaviour
             if (stopFlag == false)
             {
              //プレイヤーがしゃがんでいたら巡回モードに移行
-                if (playerObject.GetComponent<FPSController>().GetSquatFlag() && fanCollisionFlag == false)
+                if (playerObject.GetComponent<FPSController>().GetSquatFlag() && fanCollisionFlag == false && patrolTime ==120)
                 {
                     mode = 0;
                 }
                 else
                 {//発見時の停止演出
+                    patrolTime = 0;
                     StopProcessing();
                 }
             }
@@ -85,7 +98,7 @@ public class Enemy : MonoBehaviour
                 //停止演出が終わったら追跡の開始
                 if (stopFlag)
                 {
-                    navMeshAgent.destination = playerObject.transform.position;
+                    navMeshAgent.destination = targetPosition.position;
                 }
                 break;
         }
@@ -93,17 +106,29 @@ public class Enemy : MonoBehaviour
 
     public void OnDetectObject(Collider collider)
     {
-        if (collider.CompareTag("Player"))
+        if (collider.gameObject.CompareTag("Player"))
         {
             sphereCollisionFlag = true;
+            targetPosition = playerObject.transform;
+        }
+        else if (collider.gameObject.CompareTag("Robot"))
+        {
+            sphereCollisionFlag = true;
+            targetPosition = robotPosition.transform;
         }
     }
 
     public void OnFanDetectObject(Collider collider)
-    {
-        if (collider.CompareTag("Player"))
+    {//扇形の当たり判定のスクリプトでタグの判定をしているためオブジェクトが何であれフラグはtrueになる
+        fanCollisionFlag = true;
+
+        if (collider.gameObject.CompareTag("Player"))
         {
-            fanCollisionFlag = true;
+            targetPosition = playerObject.transform;
+        }
+        else if (collider.gameObject.CompareTag("Robot"))
+        {
+            targetPosition = robotPosition.transform;
         }
     }
     //発見時の停止演出処理
@@ -112,6 +137,11 @@ public class Enemy : MonoBehaviour
         navMeshAgent.isStopped = true;
 
         bool timeOut = stopTimer < 0;
+
+        if (stopTimer == 1)
+        {
+            GetComponent<AudioSource>().PlayOneShot(howling);
+        }
 
         if (timeOut)
         {
@@ -132,7 +162,6 @@ public class Enemy : MonoBehaviour
     //扇形の当たり判定
     public bool CollisionFan_to_Point(Vector3 otherPosition)
     {
-
         return false;
     }
 }

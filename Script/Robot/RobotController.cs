@@ -8,7 +8,7 @@ public class RobotController : MonoBehaviour
 {
     private Rigidbody rigidbody;
     float x, z;
-    private float speed = 0.05f;
+    [SerializeField]private float speed = 0.05f;
     private bool modeAuto = false;
     private bool modeTurn = false;
     private bool right = true;
@@ -20,8 +20,8 @@ public class RobotController : MonoBehaviour
     TransmitterCounter transmitterCounter;
     [SerializeField] private GameObject textObject;
     [SerializeField] private GameObject textObject2;
-    private Text textComponent;
-    private Text textComponent2;
+    //private Text textComponent;
+    //private Text textComponent2;
     [SerializeField] private GameObject RobotScene;
 
     public float knockback;
@@ -30,8 +30,8 @@ public class RobotController : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         transmitterCounter = GameObject.Find("TransmitterCounter").GetComponent<TransmitterCounter>();
-        textComponent = textObject.GetComponent<Text>();
-        textComponent2 = textObject2.GetComponent<Text>();
+        //textComponent = textObject.GetComponent<Text>();
+        //textComponent2 = textObject2.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -138,7 +138,7 @@ public class RobotController : MonoBehaviour
             isBack = true;
             backCount = 0;
             //modeAuto = false;
-            textComponent.text = "é©ìÆëÄèc:OFF";
+            //textComponent.text = "é©ìÆëÄèc:OFF";
 
             if (modeTurn == true)
             {
@@ -146,7 +146,7 @@ public class RobotController : MonoBehaviour
                 modeTurn = false;
                 isTurn = true;
                 turnCount = 0;
-                textComponent2.text = "âÒì]:OFF";
+                //textComponent2.text = "âÒì]:OFF";
             }
         }
         vec = Vector3.zero;
@@ -176,12 +176,12 @@ public class RobotController : MonoBehaviour
         if (modeAuto == false)
         {
             modeAuto = true;
-            textComponent.text = "é©ìÆëÄèc:ON";
+            //textComponent.text = "é©ìÆëÄèc:ON";
         }
         else
         {
             modeAuto = false;
-            textComponent.text = "é©ìÆëÄèc:OFF";
+            //textComponent.text = "é©ìÆëÄèc:OFF";
         }
     }
     public void ModeTurnOnOff()
@@ -189,12 +189,12 @@ public class RobotController : MonoBehaviour
         if (modeTurn == true)
         {
             modeTurn = false;
-            textComponent2.text = "âÒì]:OFF";
+            //textComponent2.text = "âÒì]:OFF";
         }
         else
         {
             modeTurn = true;
-            textComponent2.text = "âÒì]:ON";
+            //textComponent2.text = "âÒì]:ON";
         }
     }
 }
