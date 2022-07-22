@@ -41,6 +41,7 @@ public class FPSController : MonoBehaviour
         maxX = normalMaxX;
         const float normalMinX = -90f;
         minX = normalMinX;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -101,6 +102,7 @@ public class FPSController : MonoBehaviour
                     minX = normalMinAngleX;
                     maxX = normalMaxAngleX;
                     tabletPowerFlag = false;
+                    Cursor.visible = false;
                 }
             }
         }
@@ -115,6 +117,7 @@ public class FPSController : MonoBehaviour
                     minX = tabletMinAngleX;
                     maxX = tabletMaxAngleX;
                     tabletPowerFlag = true;
+                    Cursor.visible = true;
                 }
             }
         }
