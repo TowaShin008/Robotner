@@ -55,12 +55,22 @@ public class RobotController : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 0.1f);
             MoveForward();
-            transform.position += vec;            
+            transform.position += vec;
+            move = true;
+        }
+
+        if (move == true)
+        {
+            audioSource.mute = false;
+        }
+        else
+        {
+            audioSource.mute = true;
         }
 
         if (RobotScene.activeInHierarchy == false) 
         {
-            audioSource.mute = true;
+            //audioSource.mute = true;
             return;
         }
 
@@ -148,6 +158,12 @@ public class RobotController : MonoBehaviour
             move = true;
         }
 
+
+        if(x == 0 && z == 0&& modeAuto == false && modeTracking == false)
+        {
+            move = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (modeAuto == true && modeTracking == false)
@@ -189,15 +205,7 @@ public class RobotController : MonoBehaviour
             }
 
         }
-
-        if(move == true)
-        {
-            audioSource.mute = false;
-        }
-        else
-        {
-            audioSource.mute = true;
-        }
+       
 
     }
 
