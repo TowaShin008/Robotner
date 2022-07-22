@@ -8,7 +8,7 @@ public class RobotController : MonoBehaviour
 {
     private Rigidbody rigidbody;
     float x, z;
-    private float speed = 0.2f;
+    [SerializeField] private float speed = 0.2f;
     private bool modeAuto = false;
     private bool modeTurn = false;
     private bool modeTracking = false;
@@ -42,7 +42,7 @@ public class RobotController : MonoBehaviour
         textComponent2 = textObject2.GetComponent<Text>();
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = clip;
-        audioSource.Play();
+        audioSource.Play();       
     }
 
     // Update is called once per frame
@@ -55,7 +55,7 @@ public class RobotController : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 0.1f);
             MoveForward();
-            transform.position += vec;
+            transform.position += vec;            
         }
 
         if (RobotScene.activeInHierarchy == false) 
@@ -121,7 +121,7 @@ public class RobotController : MonoBehaviour
 
         if (z > 0)
         {
-            MoveForward();
+            MoveForward();            
             move = true;
         }
         else if (z < 0)
@@ -201,8 +201,10 @@ public class RobotController : MonoBehaviour
 
     }
 
+
+
     private void OnCollisionEnter(Collision collision)
-    {
+    {        
         if (collision.gameObject.tag != "Enemy") { return; }
         if (isBreak == false)
         {
