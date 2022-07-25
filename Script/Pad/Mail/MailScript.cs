@@ -10,6 +10,7 @@ public class MailScript : MonoBehaviour
     public GameObject newMailIcon2;
     private Vector3 savePos;
     private Vector3 vel;
+    [SerializeField] GameObject returnButton;
 
     private int counter = 0;
     private bool doJumpFlag = false;
@@ -28,6 +29,8 @@ public class MailScript : MonoBehaviour
         readCheck = new bool[mailScene.Count];
 
         savePos = newMailIcon.transform.position;
+
+        returnButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -53,17 +56,50 @@ public class MailScript : MonoBehaviour
         {
             if (Jump()) doJumpFlag = false;
         }
+
     }
 
     public void ChangeScene(string sceneName)
     {
         for (int i = 0; i < mailScene.Count; i++) {
             mailScene[i].SetActive(false);
+            
             if (sceneName == mailScene[i].name)
             {
                 mailScene[i].SetActive(true);
                 readCheck[i] = true;
             }
+            else if (mailScene[i].name == "Mails")
+            {
+                for(int c = 0; c < mailScene[i].transform.childCount; c++)
+                {
+                    if(sceneName == mailScene[i].transform.GetChild(c).name)
+                    {
+                        mailScene[i].SetActive(true);
+                        mailScene[i].transform.GetChild(c).gameObject.SetActive(true);
+
+                        for(int p = 0; p < mailScene[i].transform.childCount; p++)
+                        {
+                            if(p != c)
+                            {
+                                mailScene[i].transform.GetChild(p).gameObject.SetActive(false);
+                            }
+                        }
+
+                        readCheck[i] = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if(sceneName == "Menu")
+        {
+            returnButton.SetActive(false);
+        }
+        else
+        {
+            returnButton.SetActive(true);
         }
     }
 
