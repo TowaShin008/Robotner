@@ -62987,6 +62987,9 @@ MonoBehaviour:
   tabletPivot: {fileID: 1597065816}
   Xsensityvity: 1
   Ysensityvity: 1
+  wakeUpSpeed: 2
+  trunSpeed: 60.1
+  panelScript: {fileID: 1564524142}
   clip: {fileID: 8300000, guid: edcb4ca8c3033004a8dbff6716845343, type: 3}
   rotspeed: 3
 --- !u!136 &1737415531
