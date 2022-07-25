@@ -39,8 +39,12 @@ public class FPSController : MonoBehaviour
     bool squatFlag;
     //âπ
     public AudioClip clip;
-    bool wark = false;
+    public AudioClip walkClip;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource walkAudioSource;
+    bool walk = false;
     int warktime = 0;
+
     Vector3 savecam;
     float deathrotation = 0;
     [SerializeField] int rotspeed;
@@ -59,6 +63,12 @@ public class FPSController : MonoBehaviour
         minX = normalMinX;
         maxX = normalMaxX;
         gameStartFrag = false;
+
+        audioSource.clip = clip;
+
+        walkAudioSource.clip = walkClip;
+        walkAudioSource.Play();
+
     }
 
     // Update is called once per frame
@@ -156,7 +166,7 @@ public class FPSController : MonoBehaviour
                     {
                         count++;
                     }
-                    if (count > 5)
+                    if (count > 3)
                     {
                         wakeUpCase = 1;
                     }
@@ -211,6 +221,9 @@ public class FPSController : MonoBehaviour
                     minX = normalMinAngleX;
                     maxX = normalMaxAngleX;
                     tabletPowerFlag = false;
+                    audioSource.PlayOneShot(clip);
+                    walk = false;
+                    walkAudioSource.mute = true;
                 }
             }
         }
@@ -291,7 +304,24 @@ public class FPSController : MonoBehaviour
             Vector3 velocity = gameObject.transform.rotation * new Vector3(speed, 0, 0);
             gameObject.transform.position += velocity * Time.deltaTime;
         }
-      
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            walk = true;
+        }
+        else
+        {
+            walk = false;
+        }
+
+        if (walk == true)
+        {
+            walkAudioSource.mute = false;
+        }
+        else
+        {
+            walkAudioSource.mute = true;
+        }
+
     }
 
     //äpìxêßå¿ä÷êîÇÃçÏê¨
