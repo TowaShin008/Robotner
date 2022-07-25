@@ -98,9 +98,9 @@ public class FPSController : MonoBehaviour
                 if (Input.GetKey(KeyCode.Tab))
                 {//タブレット未起動時の視点操作範囲に変更
                     const float normalMaxAngleX = 90f;
+                    maxX = normalMaxAngleX;
                     const float normalMinAngleX = -90f;
                     minX = normalMinAngleX;
-                    maxX = normalMaxAngleX;
                     tabletPowerFlag = false;
                     Cursor.visible = false;
                 }
@@ -113,9 +113,9 @@ public class FPSController : MonoBehaviour
                 if (Input.GetKey(KeyCode.Tab))
                 {//タブレット起動時の視点操作範囲に変更
                     const float tabletMaxAngleX = 0.0f;
+                    maxX = tabletMaxAngleX;
                     const float tabletMinAngleX = 0.0f;
                     minX = tabletMinAngleX;
-                    maxX = tabletMaxAngleX;
                     tabletPowerFlag = true;
                     Cursor.visible = true;
                 }
