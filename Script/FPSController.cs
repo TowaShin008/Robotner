@@ -112,6 +112,7 @@ public class FPSController : MonoBehaviour
                     tabletPowerFlag = false;
                     audioSource.PlayOneShot(clip);
                     walk = false;
+                    walkAudioSource.mute = true;
                 }
             }
         }
