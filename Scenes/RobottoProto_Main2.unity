@@ -58755,7 +58755,7 @@ MonoBehaviour:
   tabletPivot: {fileID: 1597065816}
   Xsensityvity: 1
   Ysensityvity: 1
-  clip: {fileID: 8300000, guid: edcb4ca8c3033004a8dbff6716845343, type: 3}
+  clip: {fileID: 8300000, guid: 46d2ba9eb35b4324ba0ec84014526c40, type: 3}
 --- !u!136 &1737415531
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -58864,7 +58864,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 46d2ba9eb35b4324ba0ec84014526c40, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.338
   m_Pitch: 1.01

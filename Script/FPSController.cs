@@ -28,7 +28,10 @@ public class FPSController : MonoBehaviour
     bool squatFlag;
     //âπ
     public AudioClip clip;
-    bool wark = false;
+    public AudioClip walkClip;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource walkAudioSource;
+    bool walk = false;
     int warktime = 0;
     // Start is called before the first frame update
     void Start()
@@ -44,6 +47,11 @@ public class FPSController : MonoBehaviour
         const float normalMinX = -90f;
         minX = normalMinX;
         maxX = normalMaxX;
+        
+        audioSource.clip = clip;
+
+        walkAudioSource.clip = walkClip;
+        walkAudioSource.Play();
     }
 
     // Update is called once per frame
@@ -102,7 +110,8 @@ public class FPSController : MonoBehaviour
                     minX = normalMinAngleX;
                     maxX = normalMaxAngleX;
                     tabletPowerFlag = false;
-                    GetComponent<AudioSource>().PlayOneShot(clip);
+                    audioSource.PlayOneShot(clip);
+                    walk = false;
                 }
             }
         }
@@ -117,7 +126,7 @@ public class FPSController : MonoBehaviour
                     minX = tabletMinAngleX;
                     maxX = tabletMaxAngleX;
                     tabletPowerFlag = true;
-                    GetComponent<AudioSource>().PlayOneShot(clip);
+                    audioSource.PlayOneShot(clip);
                 }
             }
         }
@@ -184,7 +193,25 @@ public class FPSController : MonoBehaviour
             Vector3 velocity = gameObject.transform.rotation * new Vector3(speed, 0, 0);
             gameObject.transform.position += velocity * Time.deltaTime;
         }
-      
+
+
+        if (Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.D))
+        {
+            walk = true;
+        }
+        else
+        {
+            walk = false;
+        }
+
+        if (walk == true)
+        {
+            walkAudioSource.mute = false;
+        }
+        else
+        {
+            walkAudioSource.mute = true;
+        }
     }
 
     //äpìxêßå¿ä÷êîÇÃçÏê¨
