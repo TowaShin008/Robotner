@@ -5,10 +5,13 @@ using UnityEngine;
 public class DoorScript : MonoBehaviour
 {
     private Vector3 saveScale;
-    private bool openFlag;    
+    private bool openFlag;
     private int timer = 0;
     [SerializeField, TooltipAttribute("’÷‚Ü‚é‚Ü‚Å‚ÌŽžŠÔ")] int maxtimer;
     [SerializeField, TooltipAttribute("c‚©‰¡‚©")] bool isX;
+
+    public AudioClip clip;
+    private bool sound = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,7 @@ public class DoorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (timer > 0)
         {
             timer--;
@@ -26,12 +30,13 @@ public class DoorScript : MonoBehaviour
         else
         {
             openFlag = false;
+            sound = true;
         }
 
         Vector3 scale = gameObject.transform.localScale;
         Vector3 pos = gameObject.transform.position;
 
-        if(openFlag)
+        if (openFlag)
         {
             if (scale.x < 0) return;
 
@@ -56,5 +61,14 @@ public class DoorScript : MonoBehaviour
     {
         openFlag = true;
         timer = maxtimer;
+
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Robot")
+        {
+            if (sound == true)
+            {
+                GetComponent<AudioSource>().PlayOneShot(clip);
+                sound = false;
+            }
+        }
     }
 }

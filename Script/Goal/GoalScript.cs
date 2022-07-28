@@ -12,6 +12,9 @@ public class GoalScript : MonoBehaviour
     public bool isX = false;
 
     public Text accessCodeText;
+
+    public AudioClip clip;
+    private bool sound = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,11 @@ public class GoalScript : MonoBehaviour
         if (accessCode ==
             GameObject.Find("AccessCode").GetComponent<AccessCode>().GetAccessCode())
         {
+            if(sound == true)
+            {
+                GetComponent<AudioSource>().PlayOneShot(clip);
+                sound = false;
+            }
             openFlag = true;
             return;
         }
