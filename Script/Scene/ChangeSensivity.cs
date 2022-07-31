@@ -20,5 +20,13 @@ public class ChangeSensivity : MonoBehaviour
         FPSController playerScript = playerObject.GetComponent<FPSController>();
         playerScript.Xsensityvity = sliderX.value;
         playerScript.Ysensityvity = sliderY.value;
+        if (Cursor.visible == false)
+        {
+            Cursor.visible = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.visible = false;
+        }
     }
 }

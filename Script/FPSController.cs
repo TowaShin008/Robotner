@@ -68,6 +68,7 @@ public class FPSController : MonoBehaviour
 
         walkAudioSource.clip = walkClip;
         walkAudioSource.Play();
+        Cursor.visible = false;
 
     }
 
@@ -120,6 +121,7 @@ public class FPSController : MonoBehaviour
             }
             else
             {
+                
                 Quaternion rot = transform.localRotation;
                 rot = Quaternion.Euler(deathrotation, 0, 0);
                 transform.localRotation = rot;
@@ -224,6 +226,7 @@ public class FPSController : MonoBehaviour
                     audioSource.PlayOneShot(clip);
                     walk = false;
                     walkAudioSource.mute = true;
+                    Cursor.visible = false;
                 }
             }
         }
@@ -238,6 +241,9 @@ public class FPSController : MonoBehaviour
                     minX = tabletMinAngleX;
                     maxX = tabletMaxAngleX;
                     tabletPowerFlag = true;
+                    Cursor.visible = true;
+                    Cursor.visible = true;
+
                 }
             }
         }

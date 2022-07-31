@@ -27,7 +27,7 @@ public class GameOverScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                FadeManager.FadeOut("Scene_Title");
+                FadeManager.FadeOut("Scene_Load");
             }
 
             return;

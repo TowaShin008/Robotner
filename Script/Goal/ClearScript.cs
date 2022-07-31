@@ -20,13 +20,14 @@ public class ClearScript : MonoBehaviour
     {
         if (clearFlag)
         {
-            accessCodeText.text = string.Format("CLEAR!!!");
-            timeText.text = string.Format("time : " + processTimeINT);
+            //accessCodeText.text = string.Format("CLEAR!!!");
+            //timeText.text = string.Format("time : " + processTimeINT);
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                FadeManager.FadeOut("Scene_Title");
+               // FadeManager.FadeOut("Scene_Title");
             }
+            FadeManager.FadeOut("Scene_End");
 
             return;
         }
